@@ -1,31 +1,74 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Pooch Positive Training";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle/3.0.3/jquery.cycle.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    <script id="imagetpl" type="text/template">
+        {{#images}}
+        <div class="image">
+            <img src="~/images/{{fileName}}" alt="photo of {{dogName}}" />
+            <h3>Here!{{dogName}}</h3>
+            <h4>{{clientName}}</h4>
+        </div>
+    </script>
+
+    <script>
+        $(function () {
+            $('#carousel').html("lookie here!");
+            $.getJSON('/App_Data/pictures.json', function (data) {
+                $('#carousel').html("Successfully returned.");
+                var template = $('#imagetpl').html();
+                var html = Mustache.to_html(template, data);
+                $('#carousel').html("test");
+            });
+        })
+    </script>
+
+}
+
+<div class="row homepage">
+    <div class="col-md-12">
+            <img src="~/images/largelily.jpg" />
+        </div>
+
+        <div class="col-md-12">
+            <h1>Our Mission</h1>
+            <p class="mission">
+                To reduce the number of dogs surrendered or returned to animal shelters because of behavior problems, by teaching them good behavior, using only positive reinforcement and force-free training techniques.
+            </p>
+
+            <div class="col-md-4">
+                <h2>What <em>is</em> Clicker Training?</h2>
+                <p>
+                    Clicker training relies on positive reinforcement rather than punishment. The desired behavior is reinforced with something the dog likes.
+                    The click simply tells the dog, "Yes..that's what I am looking for!" The click is a sound like no other in the dog's daily experience. The click is always followed by the reward.
+                </p>
+                <p>
+                    Once the desired behavior is learned, we fade the clicker and replace treats with real-life rewards!
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h2>Why Clicker Training?</h2>
+                <p>
+                    Because it works! We don't use aversive techniques or punishment at Pooch Positive, because we don't have to. Clicker training is based on scientifically-proven
+                    principles of behavioral psychology, including operant and classical conditioning. Simply, dogs repeat behaviors that are rewarded, and cease behaviors that are not.
+                    We do not have to shock, prong, or choke to get our dogs to engage in appropriate behavior. All we need to do is reward, praise, pet, play and LOVE them.
+                </p>
+            </div>
+            <div class="col-md-4 imagebox">
+                <div id="carousel">
+                </div>
+            </div>
+
+            <div class="row col-md-12">
+                <h4>Did you know?</h4>
+                <p class="fact">
+                    @ViewBag.Fact
+                </p>
+            </div>
+        </div>
+
 </div>

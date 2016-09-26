@@ -1,14 +1,16 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allura|Amatic+SC|Kaushan+Script|Open+Sans+Condensed|Oswald">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body class="body">
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -17,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Pooch Positive Training", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -29,16 +31,30 @@
             </div>
         </div>
     </div>
+
+    <div class="container">
+        <header>
+            <div class="banner">
+                <img src="~/images/Logo.png" alt=""/>
+                <h2>Pooch Positive Training</h2>
+                <h3>Proof Positive that force-free works!</h3>
+            </div>
+        </header>
+    </div>
+
     <div class="container body-content">
+
         @RenderBody()
         <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Pooch Positive Training</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

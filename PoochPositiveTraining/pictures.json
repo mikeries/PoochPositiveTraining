@@ -1,0 +1,28 @@
+{
+  "images": [
+    {
+      "clientName": "Michelle",
+      "dogName": "Oreo"
+    },
+    {
+      "clientName": "Michelle",
+      "dogName": "Ava"
+    },
+    {
+      "clientName": "Michelle",
+      "dogName": "Lily"
+    },
+    {
+      "clientName": "Mike",
+      "dogName": "Darwin"
+    },
+    {
+      "clientName": "Steve",
+      "dogName": "Charlie"
+    },
+    {
+      "clientName": "Becky",
+      "dogName": "Dexter"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
     font-size: 16px;
     padding-top: 50px;
     font-family: "Open Sans Condensed", Arial,Verdana;
-    color: #78345e;
+    color: rgb(118, 17, 164);
     min-width: 525px;
     background: url('../images/c-b81c2038-aecc-49f9-bf0e-6a5868ffb35b.jpg');
     background-position-x: center;
@@ -18,7 +18,7 @@ h1 {
     font-size: 1.6em;
 }
 
-h2, h3 {
+h2, h3, h5 {
     font-family: 'Kaushan Script', cursive;
 }
 
@@ -93,6 +93,65 @@ h4 {
     font-size: 1.1em;
 }
 
+#imagebox {
+    position: relative;
+    top:10px;
+	width: 30%;
+    height: 300px;
+	margin: 0 auto;
+	background: #93A1A1;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+#imagebox h5 {
+	font-weight: normal;
+    font-size: 1.3em;
+	line-height: .9em;
+	color: #115F79;
+    margin: 0;
+    padding: 10px;
+}
+
+#imagebox img {
+    position: absolute;
+    padding:0;
+    margin:10px;
+    left:0;
+    top: 25px;
+	border-radius: 10px;
+    height: 300px;
+    width: auto;
+    opacity: 1.0;
+    z-index:-1;
+}
+
+#imagebox p {
+	color: #1E3A40;
+	font-size: .9em;
+}
+
+#imagebox #next_btn, #imagebox #prev_btn {
+    top:0;
+	background:none;
+	display: inline-block;
+}
+
+#imagebox #prev_btn {
+    position: absolute;
+    right:40px;
+}
+
+#imagebox #next_btn {
+    position: absolute;
+    right:20px;
+}
+
+#imagebox a#next_btn, #imagebox a#prev_btn {
+	text-decoration: none;
+	color: #FFF;
+}
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -106,5 +165,3 @@ select,
 textarea {
     max-width: 280px;
 }
-
-

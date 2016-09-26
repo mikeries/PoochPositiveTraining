@@ -211,17 +211,23 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="images\APDT Logo.jpg" />
+    <Content Include="images\Ava.jpg" />
     <Content Include="images\c-b81c2038-aecc-49f9-bf0e-6a5868ffb35b.jpg" />
+    <Content Include="images\Charlie.jpg" />
+    <Content Include="images\Darwin.jpg" />
+    <Content Include="images\Dexter.jpg" />
     <Content Include="images\K9Kabana logo.jpg" />
     <Content Include="images\Karen Pryor Logo.png" />
     <Content Include="images\largelily.jpg" />
+    <Content Include="images\Lily.jpg" />
     <Content Include="images\Logo.png" />
     <Content Include="images\Michelle.jpg" />
+    <Content Include="images\Oreo.jpg" />
     <Content Include="images\PPG Logo.png" />
     <Content Include="images\Private puppy.jpg" />
     <Content Include="images\smallhappy.jpg" />
@@ -233,12 +239,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\dogfacts.json">
+    <Content Include="pictures.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\pictures.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="App_Data\dogfacts.json" />
+    <None Include="Properties\PublishProfiles\PoochPositiveTraining20160926093447 - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\PoochPositiveTraining20160926093447 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

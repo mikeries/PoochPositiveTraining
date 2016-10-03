@@ -2,7 +2,7 @@
     font-size: 16px;
     padding-top: 50px;
     font-family: "Open Sans Condensed", Arial,Verdana;
-    color: rgb(118, 17, 164);
+    color: rgb(111, 17, 86);
     min-width: 525px;
     background: url('../images/c-b81c2038-aecc-49f9-bf0e-6a5868ffb35b.jpg');
     background-position-x: center;
@@ -16,14 +16,16 @@
 
 h1 {
     font-size: 1.6em;
+    padding:0;
+    margin:5px;
 }
 
-h2, h3, h5 {
+h2, h3, h5, #alt-caption {
     font-family: 'Kaushan Script', cursive;
 }
 
 h4 {
-    font-size: 1.6em;
+    font-size: 1.3em;
 }
 
 .banner {
@@ -57,20 +59,6 @@ h4 {
     padding-right: 2em;
 }
 
-.homepage {
-    position: relative;
-}
-
-.homepage img {
-    position:absolute;
-    top:30px;
-    left:50px;
-    width:70%;
-    height: auto;
-    opacity: 0.3;
-    margin:5px;
-}
-
 .mission {
     background-color: #b4c4d7;
     font-weight:bold;
@@ -90,67 +78,34 @@ h4 {
     border-style: ridge;
     border-color: #000000;
     border-radius: 20px;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
-#imagebox {
-    position: relative;
-    top:10px;
-	width: 30%;
-    height: 300px;
-	margin: 0 auto;
-	background: #93A1A1;
-	border-radius: 10px;
-	overflow: hidden;
+.dogImage {
+    max-height:300px;
+    max-width: 100%;
+    margin-left:auto;
+    margin-right:auto;
 }
 
-#imagebox h5 {
-	font-weight: normal;
-    font-size: 1.3em;
-	line-height: .9em;
-	color: #115F79;
-    margin: 0;
-    padding: 10px;
+#alt-caption, #prev, #next {
+    font-size: 2em;
 }
 
-#imagebox img {
-    position: absolute;
-    padding:0;
-    margin:10px;
-    left:0;
-    top: 25px;
-	border-radius: 10px;
-    height: 300px;
-    width: auto;
-    opacity: 1.0;
-    z-index:-1;
+.cycle-pager { 
+    text-align: center; width: 100%; z-index: 500; overflow: hidden;
 }
+.cycle-pager span { 
+    font-family: arial; font-size: 30px; width: 16px; height: 16px; 
+    display: inline-block; color: #ddd; cursor: pointer; 
+}
+.cycle-pager span.cycle-pager-active { color: rgb(198, 176, 208);}
+.cycle-pager > * { cursor: pointer;}
 
-#imagebox p {
-	color: #1E3A40;
-	font-size: .9em;
-}
-
-#imagebox #next_btn, #imagebox #prev_btn {
-    top:0;
-	background:none;
-	display: inline-block;
-}
-
-#imagebox #prev_btn {
-    position: absolute;
-    right:40px;
-}
-
-#imagebox #next_btn {
-    position: absolute;
-    right:20px;
-}
-
-#imagebox a#next_btn, #imagebox a#prev_btn {
-	text-decoration: none;
-	color: #FFF;
-}
+.cycle-prev, .cycle-next { position: absolute; top: 0; width: 30%; opacity: 0; filter: alpha(opacity=0); z-index: 800; height: 100%; cursor: pointer; }
+.cycle-prev { left: 0;  background: url(http://malsup.github.com/images/left.png) 50% 50% no-repeat;}
+.cycle-next { right: 0; background: url(http://malsup.github.com/images/right.png) 50% 50% no-repeat;}
+.cycle-prev:hover, .cycle-next:hover { opacity: .7; filter: alpha(opacity=70) }
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 

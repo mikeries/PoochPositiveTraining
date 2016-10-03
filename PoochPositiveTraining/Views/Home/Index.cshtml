@@ -3,52 +3,20 @@
 }
 
 @section scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle/3.0.3/jquery.cycle.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
-
-    <script id="imageTemplate" type="text/template">
-        {{#images}}
-        <div class="image">
-            <img src="/images/{{dogName}}.jpg" alt="photo of {{dogName}}" />
-            <h5>{{dogName}}</h5>
-        </div>
-        {{/images}}
-    </script>
-
-    <script>
-        $(function () {
-            $.getJSON('pictures.json', function (data) {
-                var template = $('#imageTemplate').html();
-                var html = Mustache.to_html(template, data);
-                $('#carousel').html(html);
-
-                $('#carousel').cycle({
-                    fx: 'fade',
-                    pause: 1,
-                    next: '#next_btn',
-                    prev: '#prev_btn',
-                    speed: 500,
-                    timeout: 10000
-                });
-            }).fail(function (data) {
-                $('#carousel').html("Error in retrieving JSON data.");
-            });
-        })
-    </script>
-
+    <script src="http://malsup.github.com/jquery.cycle2.js"></script>
+    <script src="http://malsup.github.io/jquery.cycle2.center.js"></script>
 }
 
 <div class="row homepage">
-    <div class="col-md-12">
-        <img src="~/images/largelily.jpg" />
-    </div>
 
-    <div class="col-md-12">
+    <div class="row col-md-12">
         <h1>Our Mission</h1>
         <p class="mission">
             To reduce the number of dogs surrendered or returned to animal shelters because of behavior problems, by teaching them good behavior, using only positive reinforcement and force-free training techniques.
         </p>
+    </div>
 
+    <div class="row col-md-12">
         <div class="col-md-4">
             <h2>What <em>is</em> Clicker Training?</h2>
             <p>
@@ -67,19 +35,35 @@
                 We do not have to shock, prong, or choke to get our dogs to engage in appropriate behavior. All we need to do is reward, praise, pet, play and LOVE them.
             </p>
         </div>
-        <div id="imagebox" class="col-md-4">
-            <div id="carousel">
+
+        <div class="col-md-4">
+            <div class="text-center">
+                <span id="alt-caption"></span>
             </div>
-            <a href="#" id="prev_btn">&laquo;</a>
-            <a href="#" id="next_btn">&raquo;</a>
+            <div class="cycle-slideshow"
+                 data-cycle-fx="scrollHorz"
+                 data-cycle-timeout="10000"
+                 data-cycle-caption="#alt-caption"
+                 data-cycle-caption-template="{{alt}}"
+                 data-cycle-center-horz=true>
+
+                <div class="cycle-prev"></div>
+                <div class="cycle-next"></div>
+                <img src="/images/Oreo.jpg" alt="Oreo" class="dogImage" />
+                <img src="/images/Ava.jpg" alt="Ava" class="dogImage" />
+                <img src="/images/Darwin.jpg" alt="Darwin" class="dogImage" />
+                <img src="/images/Lily.jpg" alt="Lily" class="dogImage" />
+                <img src="/images/Dexter.jpg" alt="Dexter" class="dogImage" />
+                <div class="cycle-pager"></div>
+            </div>
         </div>
 
-        <div class="row col-md-12">
-            <h4>Did you know?</h4>
-            <p class="fact">
-                @ViewBag.Fact
-            </p>
-        </div>
     </div>
 
+    <div class="row col-md-12">
+        <h4>Did you know?</h4>
+        <p class="fact">
+            @ViewBag.Fact
+        </p>
+    </div>
 </div>

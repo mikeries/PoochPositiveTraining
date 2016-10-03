@@ -211,15 +211,21 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\example.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="example.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\APDT Logo.jpg" />
     <Content Include="images\Ava.jpg" />
     <Content Include="images\c-b81c2038-aecc-49f9-bf0e-6a5868ffb35b.jpg" />
-    <Content Include="images\Charlie.jpg" />
-    <Content Include="images\Darwin.jpg" />
+    <Content Include="images\Charlie.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\Darwin.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="images\Dexter.jpg" />
     <Content Include="images\K9Kabana logo.jpg" />
     <Content Include="images\Karen Pryor Logo.png" />
@@ -257,6 +263,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\example.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

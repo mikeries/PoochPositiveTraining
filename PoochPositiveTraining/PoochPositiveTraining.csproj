@@ -212,6 +212,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\example.css" />
+    <Content Include="images\HeadTrainer.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="example.css" />
     <Content Include="favicon.ico" />

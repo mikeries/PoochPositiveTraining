@@ -11,6 +11,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using PoochPositiveTraining.Models;
+using System.Net.Mail;
+using System.Configuration;
+using System.Net;
 
 namespace PoochPositiveTraining
 {
@@ -18,8 +21,10 @@ namespace PoochPositiveTraining
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            using (SmtpClient client = new SmtpClient())
+            {
+                return client.SendMailAsync(ConfigurationManager.AppSettings["SupportEmailAddress"], message.Destination, message.Subject, message.Body);
+            }
         }
     }
 

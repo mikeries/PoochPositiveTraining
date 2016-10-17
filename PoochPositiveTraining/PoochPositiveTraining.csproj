@@ -300,6 +300,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Sent.cshtml" />
+    <Content Include="Views\Home\Services.cshtml" />
+    <Content Include="Views\Home\Pricing.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

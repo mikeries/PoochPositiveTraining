@@ -32,6 +32,15 @@ namespace PoochPositiveTraining.Controllers
             return View();
         }
 
+        public ActionResult Services()
+        {
+            return View();
+        }
+        public ActionResult Pricing()
+        {
+            return View();
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Send us an email.";

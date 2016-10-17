@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allura|Amatic+SC|Kaushan+Script|Open+Sans+Condensed|Oswald">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <meta name="description" content="" />
 </head>
 <body class="body">
 
@@ -24,6 +25,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Services", "Services", "Home")</li>
+                    <li>@Html.ActionLink("Pricing", "Pricing", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")

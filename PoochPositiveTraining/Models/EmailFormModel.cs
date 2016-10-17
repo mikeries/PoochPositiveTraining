@@ -4,9 +4,10 @@ namespace PoochPositiveTraining.Models
 {
     public class EmailFormModel
     {
-        [Required, Display(Name = "Your name")]
+        [Required(ErrorMessage="Please tell us your name."), Display(Name = "Your name")]
         public string FromName { get; set; }
-        [Required, Display(Name = "Your email"), EmailAddress]
+
+        [Required(ErrorMessage="Email is required."), Display(Name = "Your email"), EmailAddress]
         public string FromEmail { get; set; }
         [Required]
         public string Message { get; set; }

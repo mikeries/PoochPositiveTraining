@@ -99,7 +99,7 @@ h4 {
     font-family: arial; font-size: 30px; width: 16px; height: 16px; 
     display: inline-block; color: #ddd; cursor: pointer; 
 }
-.cycle-pager span.cycle-pager-active { color: rgb(198, 176, 208);}
+.cycle-pager .cycle-pager-active { color: rgb(198, 176, 208);}
 .cycle-pager > * { cursor: pointer;}
 
 .cycle-prev, .cycle-next { position: absolute; top: 0; width: 30%; opacity: 0; filter: alpha(opacity=0); z-index: 800; height: 100%; cursor: pointer; }
@@ -108,7 +108,7 @@ h4 {
 .cycle-prev:hover, .cycle-next:hover { opacity: .7; filter: alpha(opacity=70) }
 
 .aboutPage img, .aboutPage p{
-    padding:20px;
+    padding:10px;
 }
 #TrainingClubLogo {
     float:right;
@@ -121,6 +121,16 @@ h4 {
 }
 #PPGLogo {
     float:left;
+}
+
+.form-group {
+    padding:15px;
+}
+
+.servicesPage, .pricingPage {
+    width:80%;
+    margin-right:auto;
+    margin-left:auto;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 

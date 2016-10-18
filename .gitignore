@@ -240,3 +240,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+Web.config
+Web.Release.config
+Web.Debug.config
+Views/Web.config

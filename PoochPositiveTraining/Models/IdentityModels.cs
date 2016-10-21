@@ -29,5 +29,7 @@ namespace PoochPositiveTraining.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<PoochPositiveTraining.Models.Client> Clients { get; set; }
     }
 }

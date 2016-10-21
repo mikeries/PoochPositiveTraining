@@ -4,34 +4,28 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="row">
-        <h4>Client: @Model.Name</h4>
-        <div class="form-group row">
-            <div class="col-md-offset-1 col-md-10">
-                <button type="button" onclick="location.href='@Url.Action("Index", "Clients")'" class="btn btn-default">
-                    <span class="glyphicon glyphicon-arrow-left"></span>
-                    Back
-                </button>
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div class="col-md-12">
+            <button type="button" onclick="location.href='@Url.Action("Index", "Clients")'" class="btn btn-default">
+                <span class="glyphicon glyphicon-arrow-left"></span>
+                Back
+            </button>
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ClientID)
-
     </div>
 
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ClientID)
+
     <div class="row">
+
         <div class="col-md-8">
-            
+
             <div class="form-group row">
                 @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
                 <div class="col-md-4">
@@ -49,7 +43,7 @@
             <div class="form-group row">
                 @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control phone" } })
                     @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                 </div>
 
@@ -115,4 +109,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.min.js"></script>
+    <script>
+        $(function () {
+            $('.phone').mask('(000) 000-0000');
+        });
+    </script>
+
 }

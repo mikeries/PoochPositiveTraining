@@ -4,11 +4,23 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Client</h4>
+<div class="row">
+    <p>
+        <button type="button" onclick="location.href='@Url.Action("Index", "Clients")'" class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            Back
+        </button>
+        <button type="button" onclick="location.href='@Url.Action("Edit", "Clients", new { id = Model.ClientID })'"
+                class="btn btn-default">
+            Edit
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    </p>
     <hr />
+</div>
+
+<div class="row">
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -82,11 +94,5 @@
             @Html.DisplayFor(model => model.Note)
         </dd>
 
-
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ClientID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

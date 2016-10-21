@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<PoochPositiveTraining.Models.Client>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Client List";
 }
 
-<h2>Index</h2>
+<div class="row col-md-12">
+        <p>
+            <button type="button" onclick="location.href='@Url.Action("Create", "Clients")'" class="btn btn-default">
+                New
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </p>
+</div>
 
-<p>
-    <button type="button" onclick="location.href='@Url.Action("Create", "Clients")'">
-        New
-        <span class="glyphicon glyphicon-plus"></span>
-    </button>
-</p>
 <table class="table">
     <tr>
         <th>
@@ -29,7 +30,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.ActionLink(item.Name, "Details", new { id = item.ClientID })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Phone)
@@ -39,7 +40,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ClientID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClientID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ClientID })
         </td>
     </tr>

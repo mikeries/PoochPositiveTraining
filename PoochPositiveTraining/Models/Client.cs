@@ -8,7 +8,6 @@ namespace PoochPositiveTraining.Models
 {
     public class Client
     {
-        [Key]
         public int ClientID { get; set; }
 
         [Required]
@@ -21,10 +20,9 @@ namespace PoochPositiveTraining.Models
 
         public string Name { get { return FirstName + " " + LastName; } }
 
-        [Required]
         [Phone]
-        [DisplayFormat(DataFormatString = "{0:###-###-####}")]
-        public long Phone { get; set; }
+        [Required]
+        public string Phone { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -42,9 +40,7 @@ namespace PoochPositiveTraining.Models
         [StringLength(20)]
         public string State { get; set; }
 
-        [Required]
-        // TODO:  Figure out the JQuery validator libraries to validate a zipcode:  Formvalidation.io
-        public int Zip { get; set; }
+        public string Zip { get; set; }
 
         [Required]
         [EmailAddress]

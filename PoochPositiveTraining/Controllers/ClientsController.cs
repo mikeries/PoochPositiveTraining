@@ -46,8 +46,9 @@ namespace PoochPositiveTraining.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClientID,FirstName,LastName,Phone,Street1,Street2,City,State,Zip,Email,Note")] Client client)
+        public ActionResult Create([Bind(Include = "FirstName,LastName,Phone,Street1,Street2,City,State,Zip,Email,Note")] Client client)
         {
+
             if (ModelState.IsValid)
             {
                 db.Clients.Add(client);

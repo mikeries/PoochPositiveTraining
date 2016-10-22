@@ -22,6 +22,7 @@ namespace PoochPositiveTraining.Models
 
         [Phone]
         [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Invalid Phone")]
         public string Phone { get; set; }
 
         [Required]
@@ -40,10 +41,13 @@ namespace PoochPositiveTraining.Models
         [StringLength(20)]
         public string State { get; set; }
 
+        [RegularExpression(@"^\d{5}(-\d{4})?$", ErrorMessage = "Invalid Zip")]
+        [StringLength(12)]
         public string Zip { get; set; }
 
         [Required]
         [EmailAddress]
+        [StringLength(40)]
         public string Email { get; set; }
 
         public string Note { get; set; }

@@ -88,7 +88,7 @@
             <div class="form-group row">
                 @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control zip" } })
                     @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -112,8 +112,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.min.js"></script>
     <script>
-            $(function () {
-                $('.phone').mask('(000) 000-0000');
-            });
+        $(function () {
+            $(".phone").mask("(000) 000-0000");
+            $(".zip").mask("00000-0000");
+        });
     </script>
 }

@@ -10,7 +10,6 @@ namespace PoochPositiveTraining.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "PoochPositiveTraining.Models.PoochPositiveTrainingContext";
         }
 
         protected override void Seed(PoochPositiveTraining.Models.PoochPositiveTrainingContext context)

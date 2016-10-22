@@ -218,6 +218,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\example.css" />
+    <Content Include="images\DogNoImage.png" />
     <Content Include="images\HeadTrainer.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="example.css" />
@@ -240,6 +241,7 @@
     <Content Include="images\Lily.jpg" />
     <Content Include="images\Logo.png" />
     <Content Include="images\Michelle.jpg" />
+    <Content Include="images\NewDog.png" />
     <Content Include="images\Oreo.jpg" />
     <Content Include="images\PPG Logo.png" />
     <Content Include="images\Private puppy.jpg" />
@@ -312,6 +314,7 @@
     <Content Include="Views\Clients\Details.cshtml" />
     <Content Include="Views\Clients\Edit.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\Clients\Dog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -43,7 +43,7 @@
             <div class="form-group row">
                 @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control phone" } })
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { placeholder = "(123)-456-7890", @class = "form-control phone" } })
                     @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                 </div>
 

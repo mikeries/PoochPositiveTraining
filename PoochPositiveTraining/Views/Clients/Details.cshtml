@@ -112,7 +112,7 @@
                 }
             }
             <li>
-                <a href="@Url.Action("Create", "Dogs")">
+                <a href="@Url.Action("Create", "Dogs", new { clientID = Model.ClientID })">
                     <p>Add Dog</p>
                     <img src="~/images/NewDog.png" class="dogThumbnail" />
                 </a>

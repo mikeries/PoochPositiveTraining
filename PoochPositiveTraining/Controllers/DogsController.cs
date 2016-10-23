@@ -37,9 +37,15 @@ namespace PoochPositiveTraining.Controllers
         }
 
         // GET: Dogs/Create
-        public ActionResult Create()
+        public ActionResult Create(int? clientID)
         {
-            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "FirstName");
+            if (clientID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "FirstName", clientID);
+            ViewBag.Owner = clientID;
             return View();
         }
 
@@ -54,10 +60,11 @@ namespace PoochPositiveTraining.Controllers
             {
                 db.Dogs.Add(dog);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Clients", new { id = dog.ClientID });
             }
 
             ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "FirstName", dog.ClientID);
+            ViewBag.Owner = dog.ClientID;
             return View(dog);
         }
 
@@ -88,7 +95,7 @@ namespace PoochPositiveTraining.Controllers
             {
                 db.Entry(dog).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Clients", new { id = dog.ClientID});
             }
             ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "FirstName", dog.ClientID);
             return View(dog);
@@ -117,7 +124,7 @@ namespace PoochPositiveTraining.Controllers
             Dog dog = db.Dogs.Find(id);
             db.Dogs.Remove(dog);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Clients", new { id = dog.ClientID });
         }
 
         protected override void Dispose(bool disposing)

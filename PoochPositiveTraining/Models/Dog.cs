@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PoochPositiveTraining.Models
 {
@@ -16,6 +17,7 @@ namespace PoochPositiveTraining.Models
 
         public string Comments { get; set; }
 
+        [DisplayName("Owner")]
         public int ClientID { get; set; }
 
         public Client Client { get; set; }

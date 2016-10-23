@@ -98,16 +98,25 @@
     </div>
 
     <div class="col-md-7">
-        @if (Model.Dogs != null)
-        {
-            foreach (var dog in Model.Dogs.ToList())
+        <ul class="dogList">
+            @if (Model.Dogs != null)
             {
-                <img src = "~/images/DogNoImage.png" class="dogThumbnail"/>
+                foreach (var dog in Model.Dogs.ToList())
+                {
+                    <li>
+                        <a href="@Url.Action("Edit", "Dogs", new { id = dog.DogID })">
+                            <p>@dog.Name</p>
+                            <img src="~/images/DogNoImage.png" class="dogThumbnail" />
+                        </a>
+                    </li>
+                }
             }
-        }
-        <img src="~/images/DogNoImage.png" class="dogThumbnail" />
-        <img src="~/images/DogNoImage.png" class="dogThumbnail"/>
-        <img src="~/images/Darwin.jpg" class="dogThumbnail" />
-        <a href="@Url.Action("Index", "Clients")"><img src="~/images/NewDog.png" class="dogThumbnail"/></a>
+            <li>
+                <a href="@Url.Action("Create", "Dogs")">
+                    <p>Add Dog</p>
+                    <img src="~/images/NewDog.png" class="dogThumbnail" />
+                </a>
+            </li>
+        </ul>
     </div>
 </div>

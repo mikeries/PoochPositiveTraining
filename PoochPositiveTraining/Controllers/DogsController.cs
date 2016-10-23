@@ -14,27 +14,7 @@ namespace PoochPositiveTraining.Controllers
     {
         private PoochPositiveTrainingContext db = new PoochPositiveTrainingContext();
 
-        // GET: Dogs
-        public ActionResult Index()
-        {
-            var dogs = db.Dogs.Include(d => d.Client);
-            return View(dogs.ToList());
-        }
 
-        // GET: Dogs/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Dog dog = db.Dogs.Find(id);
-            if (dog == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dog);
-        }
 
         // GET: Dogs/Create
         public ActionResult Create(int? clientID)
@@ -54,7 +34,7 @@ namespace PoochPositiveTraining.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DogID,Name,Breed,Comments,ClientID")] Dog dog)
+        public ActionResult Create([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID")] Dog dog)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +69,7 @@ namespace PoochPositiveTraining.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DogID,Name,Breed,Comments,ClientID")] Dog dog)
+        public ActionResult Edit([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID")] Dog dog)
         {
             if (ModelState.IsValid)
             {

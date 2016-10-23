@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace PoochPositiveTraining.Models
@@ -14,6 +15,10 @@ namespace PoochPositiveTraining.Models
 
         [StringLength(30)]
         public string Breed { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public Nullable<DateTime> Birthday { get; set; }
 
         public string Comments { get; set; }
 

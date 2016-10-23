@@ -317,8 +317,8 @@
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Dogs\Create.cshtml" />
     <Content Include="Views\Dogs\Delete.cshtml" />
-    <Content Include="Views\Dogs\Details.cshtml" />
     <Content Include="Views\Dogs\Edit.cshtml" />
+    <Content Include="Views\NewDogEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -88,7 +88,7 @@ namespace PoochPositiveTraining.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dog dog = db.Dogs.Find(id);
+            Dog dog = db.Dogs.Include(d => d.Thumbnail).FirstOrDefault(d => d.DogID == id);
             if (dog == null)
             {
                 return HttpNotFound();
@@ -102,14 +102,28 @@ namespace PoochPositiveTraining.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID")] Dog dog)
+        public ActionResult Edit([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID")] Dog dog, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(dog).State = EntityState.Modified;
+
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new FilePath
+                    {
+                        FileName = dog.Name + "-" + dog.DogID.ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        FileType = FileType.Photo
+                    };
+
+                    dog.Thumbnail = photo;
+                    upload.SaveAs(Path.Combine(Server.MapPath("~/images/thumbnails"), photo.FileName));
+                }
+
                 db.SaveChanges();
-                return RedirectToAction("Details", "Clients", new { id = dog.ClientID});
+                return RedirectToAction("Details", "Clients", new { id = dog.ClientID });
             }
+
             ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "Name", dog.ClientID);
             return View(dog);
         }

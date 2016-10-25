@@ -21,29 +21,36 @@
             droppedFiles = false,
             showFiles	 = function( files )
             {
-                var f = files[0];
+                if (files.length == 0) {
+                    var html = '<img src="/images/thumbnails/DogNoImage.png" class="thumbnail" />';
+                    var img = $(html)[0];
+                    $dropbox.find('.thumbnail').replaceWith(img);
+                }
+                else
+                {
+                    var f = files[0];
 
-                // ignore file if not an image
-                if (f.type.match('image.*')) {
-                    var reader = new FileReader();
+                    // ignore file if not an image
+                    if (f.type.match('image.*')) {
+                        var reader = new FileReader();
 
-                    reader.onload = (function (theFile) {
-                        return function (e) {
-                            var html = ['<img class="thumbnail" src="', e.target.result,
-                                                '" title="', escape(theFile.name), '"/>'].join('');
-                            var img = $(html)[0];
-                            $dropbox.find('.thumbnail').replaceWith(img);
-                        };
-                    })(f);
+                        reader.onload = (function (theFile) {
+                            return function (e) {
+                                var html = ['<img class="thumbnail" src="', e.target.result,
+                                                    '" title="', escape(theFile.name), '"/>'].join('');
+                                var img = $(html)[0];
+                                $dropbox.find('.thumbnail').replaceWith(img);
+                            };
+                        })(f);
 
-                    reader.readAsDataURL(f);
+                        reader.readAsDataURL(f);
+                    }
                 }
             };
 
         $input.on( 'change', function( e )
         {
             showFiles(e.target.files);
-            $input.removClass('has-focus');
         });
 
         // drag&drop files if the feature is available
@@ -67,8 +74,7 @@
             })
             .on( 'drop', function( e )
             {
-                droppedFiles = e.originalEvent.dataTransfer.files; // the files that were dropped
-                showFiles(droppedFiles);
+                $input.prop("files", e.originalEvent.dataTransfer.files)
             });
         }
 

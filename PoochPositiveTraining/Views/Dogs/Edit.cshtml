@@ -4,7 +4,9 @@
     ViewBag.Title = "Edit";
 }
 
-@using (Html.BeginForm())
+<link href="~/Content/draganddrop.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Edit", "Dogs", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -64,14 +66,30 @@
 
         <div class="col-md-7">
             <div class="form-group row">
-                @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
-                <div class="col-md-10">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label text-right" })
                     @Html.TextAreaFor(model => model.Comments, 10, 40, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
                 </div>
+
+                <div class="dropbox text-center col-md-6">
+                    <input type="file" name="upload" id="files" class="dropbox__file" accept="image/*" single />
+                    <label for="files" class="btn btn-warning"><strong>Choose image</strong></label>
+                    <div class="dropzone">
+                        @{
+                            if (Model.Thumbnail != null)
+                            {
+                                <img src="~/images/thumbnails/@Model.Thumbnail.FileName" class="thumbnail" onerror="if (this.src != '/images/thumbnails/DogNoImage.png') this.src='/images/thumbnails/DogNoImage.png'" />
+                            }
+                            else
+                            {
+                                <img src="/images/thumbnails/DogNoImage.png" class="thumbnail" />
+                            }
+                        }
+                    </div>
+                </div>
             </div>
         </div>
-
 
     </div>
 }
@@ -79,4 +97,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/draganddrop.js"></script>
 }

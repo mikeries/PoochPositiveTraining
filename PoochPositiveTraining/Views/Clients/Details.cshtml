@@ -109,11 +109,11 @@
                             @{
                                 if (dog.Thumbnail != null)
                                 {
-                                    <img src="~/images/thumbnails/@dog.Thumbnail.FileName" class="dogThumbnail" onerror="if (this.src != '/images/thumbnails/DogNoImage.png') this.src='/images/thumbnails/DogNoImage.png'" />
+                                    <img src="~/images/thumbnails/@dog.Thumbnail.FileName" class="thumbnail" onerror="if (this.src != '/images/thumbnails/DogNoImage.png') this.src='/images/thumbnails/DogNoImage.png'" />
                                 }
                                 else
                                 {
-                                    <img src="/images/thumbnails/DogNoImage.png" class="dogThumbnail" />
+                                    <img src="/images/thumbnails/DogNoImage.png" class="thumbnail" />
                                 }
                             }
                         </a>
@@ -123,7 +123,7 @@
             <li>
                 <a href="@Url.Action("Create", "Dogs", new { clientID = Model.ClientID })">
                     <p>Add Dog</p>
-                    <img src="~/images/NewDog.png" class="dogThumbnail" />
+                    <img src="~/images/NewDog.png" class="thumbnail" />
                 </a>
             </li>
         </ul>

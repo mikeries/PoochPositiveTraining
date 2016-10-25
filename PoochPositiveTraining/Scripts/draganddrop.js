@@ -16,50 +16,40 @@
     // attach the effect to every dropbox on the page
     $( '.dropbox' ).each( function()
     {
-        var $form		 = $( this ),
-            $input		 = $form.find( 'input[type="file"]' ),
-            $label		 = $form.find( 'label' ),
-            $errorMsg	 = $form.find( '.dropbox__error span' ),
-            $restart	 = $form.find( '.dropbox__restart' ),
+        var $dropbox = $(this),
+            $input		 = $dropbox.find( 'input[type="file"]' ),
             droppedFiles = false,
             showFiles	 = function( files )
             {
-                for (var i = 0, f; f = files[i]; i++) {
+                var f = files[0];
 
-                    // Only process image files.
-                    if (!f.type.match('image.*')) {
-                        continue;
-                    }
-
+                // ignore file if not an image
+                if (f.type.match('image.*')) {
                     var reader = new FileReader();
 
-                    // Closure to capture the file information.
                     reader.onload = (function (theFile) {
                         return function (e) {
-                            // Render thumbnail.
-                            var span = document.createElement('span');
-                            span.innerHTML = ['<img class="dogThumbnail" src="', e.target.result,
-                                              '" title="', escape(theFile.name), '"/>'].join('');
-                            var oldspan = document.getElementById('span');
-                            document.getElementById('list').replaceChild(span, oldspan);
-                            span.id = 'span';
+                            var html = ['<img class="thumbnail" src="', e.target.result,
+                                                '" title="', escape(theFile.name), '"/>'].join('');
+                            var img = $(html)[0];
+                            $dropbox.find('.thumbnail').replaceWith(img);
                         };
                     })(f);
 
-                    // Read in the image file as a data URL.
                     reader.readAsDataURL(f);
                 }
             };
 
         $input.on( 'change', function( e )
         {
-            showFiles( e.target.files );
+            showFiles(e.target.files);
+            $input.removClass('has-focus');
         });
 
         // drag&drop files if the feature is available
         if( isAdvancedUpload )
         {
-            $form
+            $dropbox
             .addClass( 'has-advanced-upload' ) // letting the CSS part to know drag&drop is supported by the browser
             .on( 'drag dragstart dragend dragover dragenter dragleave drop', function( e )
             {
@@ -69,27 +59,18 @@
             })
             .on( 'dragover dragenter', function() //
             {
-                $form.addClass( 'is-dragover' );
+                $dropbox.addClass( 'is-dragover' );
             })
             .on( 'dragleave dragend drop', function()
             {
-                $form.removeClass( 'is-dragover' );
+                $dropbox.removeClass( 'is-dragover' );
             })
             .on( 'drop', function( e )
             {
                 droppedFiles = e.originalEvent.dataTransfer.files; // the files that were dropped
-                showFiles( droppedFiles );
+                showFiles(droppedFiles);
             });
         }
-
-        // restart the form if has a state of error/success
-
-        $restart.on( 'click', function( e )
-        {
-            e.preventDefault();
-            $form.removeClass( 'is-error is-success' );
-            $input.trigger( 'click' );
-        });
 
         // Firefox focus bug fix for file input
         $input

@@ -7,16 +7,15 @@
 
 <link href="~/Content/draganddrop.css" rel="stylesheet" />
 
-@using (Html.BeginForm("DropTest", "Dogs", null, FormMethod.Post, new { enctype = "multipart/form-data", @class = "dropbox"}))
+@using (Html.BeginForm("DropTest", "Dogs", null, FormMethod.Post, new { enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
-    <div id="drop_zone" class="dropbox__input">
+    <div class="dropbox text-center">
         <input type="file" name="upload" id="files" class="dropbox__file"  single />
-        <label for="files" class="btn btn-warning"><strong>Choose a file</strong><span class="dropbox__dragndrop"> or drag it here</span>.</label>
-        <button type="submit" class="btn btn-default">Upload</button>
-        <div id="list">
-            <span id="span"><img src="~/images/thumbnails/DogNoImage.png" class="dogThumbnail" /></span>
+        <label for="files" class="btn btn-warning"><strong>Choose image</strong></label>
+        <div class="dropzone">
+            <img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />
         </div>
     </div>
 }

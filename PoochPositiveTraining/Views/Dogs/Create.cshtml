@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","Dogs",null,FormMethod.Post,new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -58,10 +58,15 @@
 
         <div class="col-md-7">
             <div class="form-group row">
-                @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2 text-right" })
-                <div class="col-md-10">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label text-right" })
                     @Html.TextAreaFor(model => model.Comments, 10, 40, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.Label("Photo", new { @class = "control-label text-right" })
+                    <input type="file" id="Photo" name="upload" />
                 </div>
             </div>
         </div>
@@ -69,8 +74,6 @@
     </div>
 
 }
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

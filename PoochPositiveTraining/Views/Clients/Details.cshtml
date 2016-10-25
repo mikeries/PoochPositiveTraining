@@ -106,7 +106,16 @@
                     <li>
                         <a href="@Url.Action("Edit", "Dogs", new { id = dog.DogID })">
                             <p>@dog.Name</p>
-                            <img src="~/images/DogNoImage.png" class="dogThumbnail" />
+                            @{
+                                if (dog.Thumbnail != null)
+                                {
+                                    <img src="~/images/thumbnails/@dog.Thumbnail.FileName" class="dogThumbnail" onerror="if (this.src != '/images/thumbnails/DogNoImage.png') this.src='/images/thumbnails/DogNoImage.png'" />
+                                }
+                                else
+                                {
+                                    <img src="/images/thumbnails/DogNoImage.png" class="dogThumbnail" />
+                                }
+                            }
                         </a>
                     </li>
                 }

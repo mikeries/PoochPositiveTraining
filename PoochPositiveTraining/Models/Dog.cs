@@ -22,10 +22,12 @@ namespace PoochPositiveTraining.Models
 
         public string Comments { get; set; }
 
+        public FilePath Thumbnail { get; set; }
+
         [DisplayName("Owner")]
         public int ClientID { get; set; }
 
-        public Client Client { get; set; }
+        public virtual Client Client { get; set; }
         
     }
 }

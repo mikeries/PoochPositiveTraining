@@ -52,7 +52,7 @@ namespace PoochPositiveTraining.Models
 
         public string Note { get; set; }
 
-        public List<Dog> Dogs { get; set; }
+        public virtual List<Dog> Dogs { get; set; }
 
     }
 }

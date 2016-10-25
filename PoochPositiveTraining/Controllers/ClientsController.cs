@@ -27,7 +27,7 @@ namespace PoochPositiveTraining.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Include(c => c.Dogs).SingleOrDefault(x => x.ClientID == id);
+            Client client = db.Clients.Where(x => x.ClientID == id).Include(c => c.Dogs.Select(t => t.Thumbnail)).SingleOrDefault();
             if (client == null)
             {
                 return HttpNotFound();

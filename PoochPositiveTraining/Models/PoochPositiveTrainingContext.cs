@@ -22,5 +22,7 @@ namespace PoochPositiveTraining.Models
         public System.Data.Entity.DbSet<PoochPositiveTraining.Models.Client> Clients { get; set; }
 
         public System.Data.Entity.DbSet<PoochPositiveTraining.Models.Dog> Dogs { get; set; }
+
+        public System.Data.Entity.DbSet<PoochPositiveTraining.Models.FilePath> FilePaths { get; set; }
     }
 }

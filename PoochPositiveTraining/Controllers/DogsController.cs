@@ -7,12 +7,31 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PoochPositiveTraining.Models;
+using System.IO;
 
 namespace PoochPositiveTraining.Controllers
 {
     public class DogsController : Controller
     {
         private PoochPositiveTrainingContext db = new PoochPositiveTrainingContext();
+
+        public ActionResult DropTest()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DropTest(HttpPostedFileBase upload)
+        {
+            if (ModelState.IsValid)
+            {
+
+                return RedirectToAction("Index", "Clients");
+            }
+
+            return View();
+        }
 
 
 
@@ -24,7 +43,7 @@ namespace PoochPositiveTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "FirstName", clientID);
+            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "Name", clientID);
             ViewBag.Owner = clientID;
             return View();
         }
@@ -34,16 +53,30 @@ namespace PoochPositiveTraining.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID")] Dog dog)
+        public ActionResult Create([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID")] Dog dog, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
                 db.Dogs.Add(dog);
                 db.SaveChanges();
+
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new FilePath
+                    {
+                        FileName = dog.Name + "-" + dog.DogID.ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        FileType = FileType.Photo
+                    };
+
+                    dog.Thumbnail = photo;
+                    upload.SaveAs(Path.Combine(Server.MapPath("~/images/thumbnails"), photo.FileName));
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Details", "Clients", new { id = dog.ClientID });
             }
 
-            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "FirstName", dog.ClientID);
+            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "Name", dog.ClientID);
             ViewBag.Owner = dog.ClientID;
             return View(dog);
         }
@@ -60,7 +93,7 @@ namespace PoochPositiveTraining.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "FirstName", dog.ClientID);
+            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "Name", dog.ClientID);
             return View(dog);
         }
 
@@ -77,7 +110,7 @@ namespace PoochPositiveTraining.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Details", "Clients", new { id = dog.ClientID});
             }
-            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "FirstName", dog.ClientID);
+            ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "Name", dog.ClientID);
             return View(dog);
         }
 

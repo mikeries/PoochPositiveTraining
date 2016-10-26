@@ -77,9 +77,9 @@
                     <label for="files" class="btn btn-warning"><strong>Choose image</strong></label>
                     <div class="dropzone">
                         @{
-                            if (Model.Thumbnail != null)
+                            if (Model.ThumbnailID != 0)
                             {
-                                <img src="~/images/thumbnails/@Model.Thumbnail.FileName" class="thumbnail" onerror="if (this.src != '/images/thumbnails/DogNoImage.png') this.src='/images/thumbnails/DogNoImage.png'" />
+                                <img src="~/File?id=@Model.ThumbnailID" class="thumbnail" onerror="if (this.src != '/images/thumbnails/DogNoImage.png') this.src='/images/thumbnails/DogNoImage.png'" />
                             }
                             else
                             {

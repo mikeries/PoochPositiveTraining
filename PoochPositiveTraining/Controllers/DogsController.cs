@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PoochPositiveTraining.Models;
-using System.IO;
 
 namespace PoochPositiveTraining.Controllers
 {
@@ -62,17 +61,27 @@ namespace PoochPositiveTraining.Controllers
 
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    var photo = new FilePath
+
+                    var thumbnail = new File
                     {
                         FileName = dog.Name + "-" + dog.DogID.ToString() + System.IO.Path.GetExtension(upload.FileName),
-                        FileType = FileType.Photo
+                        FileType = FileType.Thumbnail,
+                        ContentType = upload.ContentType,
+                        DogID = dog.DogID
                     };
 
-                    dog.Thumbnail = photo;
-                    upload.SaveAs(Path.Combine(Server.MapPath("~/images/thumbnails"), photo.FileName));
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        thumbnail.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+
+                    db.Files.Add(thumbnail);
                     db.SaveChanges();
+
+                    dog.ThumbnailID = thumbnail.FileId;
                 }
 
+                db.SaveChanges();
                 return RedirectToAction("Details", "Clients", new { id = dog.ClientID });
             }
 
@@ -88,7 +97,7 @@ namespace PoochPositiveTraining.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dog dog = db.Dogs.Include(d => d.Thumbnail).FirstOrDefault(d => d.DogID == id);
+            Dog dog = db.Dogs.Find(id);
             if (dog == null)
             {
                 return HttpNotFound();
@@ -110,14 +119,29 @@ namespace PoochPositiveTraining.Controllers
 
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    var photo = new FilePath
+                    var thumbnail = new File
                     {
                         FileName = dog.Name + "-" + dog.DogID.ToString() + System.IO.Path.GetExtension(upload.FileName),
-                        FileType = FileType.Photo
+                        FileType = FileType.Thumbnail,
+                        ContentType = upload.ContentType,
+                        DogID = dog.DogID
                     };
 
-                    dog.Thumbnail = photo;
-                    upload.SaveAs(Path.Combine(Server.MapPath("~/images/thumbnails"), photo.FileName));
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        thumbnail.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+
+                    File oldThumb = db.Files.Find(dog.ThumbnailID);
+                    if (oldThumb != null)
+                    {
+                        db.Files.Remove(oldThumb);
+                    }
+
+                    db.Files.Add(thumbnail);
+                    db.SaveChanges();
+
+                    dog.ThumbnailID = thumbnail.FileId;
                 }
 
                 db.SaveChanges();

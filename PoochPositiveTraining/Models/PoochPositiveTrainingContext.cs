@@ -15,7 +15,7 @@ namespace PoochPositiveTraining.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public PoochPositiveTrainingContext() : base("name=PoochPositiveTrainingContext")
+        public PoochPositiveTrainingContext() : base()
         {
         }
 
@@ -24,5 +24,7 @@ namespace PoochPositiveTraining.Models
         public System.Data.Entity.DbSet<PoochPositiveTraining.Models.Dog> Dogs { get; set; }
 
         public System.Data.Entity.DbSet<PoochPositiveTraining.Models.FilePath> FilePaths { get; set; }
+
+        public DbSet<File> Files { get; set; }
     }
 }

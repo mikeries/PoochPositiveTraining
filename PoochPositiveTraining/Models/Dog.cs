@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PoochPositiveTraining.Models
 {
@@ -22,7 +24,9 @@ namespace PoochPositiveTraining.Models
 
         public string Comments { get; set; }
 
-        public FilePath Thumbnail { get; set; }
+        public int ThumbnailID { get; set; }
+
+        public virtual ICollection<File> Files { get; set; }
 
         [DisplayName("Owner")]
         public int ClientID { get; set; }

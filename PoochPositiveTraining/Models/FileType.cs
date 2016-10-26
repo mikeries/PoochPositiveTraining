@@ -2,6 +2,7 @@
 {
     public enum FileType
     {
-        Thumbnail = 1, Photo
+        Thumbnail = 1,
+        Photo
     }
 }

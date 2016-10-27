@@ -204,6 +204,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610271503456_init.cs" />
+    <Compile Include="Migrations\201610271503456_init.Designer.cs">
+      <DependentUpon>201610271503456_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
@@ -223,9 +227,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\resizeandcrop.css" />
     <Content Include="Content\draganddrop.css" />
     <Content Include="Content\example.css" />
+    <Content Include="images\crop.svg" />
     <Content Include="images\DogNoImage.png" />
+    <Content Include="images\gridme.png" />
     <Content Include="images\HeadTrainer.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="example.css" />
@@ -242,6 +249,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="images\Dexter.jpg" />
+    <Content Include="images\image.jpg" />
     <Content Include="images\K9Kabana logo.jpg" />
     <Content Include="images\Karen Pryor Logo.png" />
     <Content Include="images\largelily.jpg" />
@@ -254,6 +262,7 @@
     <Content Include="images\Private puppy.jpg" />
     <Content Include="images\smallhappy.jpg" />
     <Content Include="images\STL Training Club Logo.png" />
+    <Content Include="images\Tom.JPG" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -265,6 +274,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\dogfacts.json" />
+    <Content Include="Scripts\resizeandcrop.js" />
     <Content Include="XMLFile1.xml" />
     <None Include="Properties\PublishProfiles\PoochPositiveTraining - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -342,6 +352,11 @@
   <ItemGroup>
     <Folder Include="images\thumbnails\" />
     <Folder Include="Views\File\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201610271503456_init.resx">
+      <DependentUpon>201610271503456_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

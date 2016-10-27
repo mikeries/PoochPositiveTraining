@@ -5,6 +5,12 @@
 @section scripts {
     <script src="http://malsup.github.com/jquery.cycle2.js"></script>
     <script src="http://malsup.github.io/jquery.cycle2.center.js"></script>
+
+    <script>
+    $(function () {
+            $('#slideshow').removeClass("hidden");
+    });
+    </script>
 }
 
 <div class="row homepage">
@@ -36,7 +42,7 @@
             </p>
         </div>
 
-        <div class="col-md-4">
+        <div id="slideshow" class="col-md-4 hidden">
             <div class="text-center">
                 <span id="alt-caption"></span>
             </div>

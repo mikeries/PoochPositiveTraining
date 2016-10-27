@@ -6,21 +6,44 @@
 <h2>DropTest</h2>
 
 <link href="~/Content/draganddrop.css" rel="stylesheet" />
+<link href="~/Content/resizeandcrop.css" rel="stylesheet" />
 
 @using (Html.BeginForm("DropTest", "Dogs", null, FormMethod.Post, new { enctype = "multipart/form-data"}))
 {
     @Html.AntiForgeryToken()
 
-    <div class="dropbox text-center">
-        <input type="file" name="upload" id="files" class="dropbox__file"  single />
-        <label for="files" class="btn btn-warning"><strong>Choose image</strong></label>
-        <div class="dropzone">
-            <img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />
+    <div class="row">
+        <div class="dropbox text-center col-md-2">
+            <input type="file" name="upload" id="files" class="dropbox__file" single />
+            <label for="files" class="btn btn-warning"><strong>Choose image</strong></label>
+            <div class="dropzone">
+                <img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />
+            </div>
+            <button> Submit </button>
         </div>
-        <button> Submit </button>
+
+        <div>
+            <!-- Top Navigation -->
+            <div class="content col-md-10 text-center hidden">
+                <div class="component">
+                    <div class="overlay">
+                        <div class="overlay-inner">
+                        </div>
+                    </div>
+                    <img class="resize-image" src="~/images/thumbnails/DogNoImage.png" alt="image for resizing">
+                    <button type="button" class="btn btn-crop js-crop">Crop<img class="icon-crop" src="~/images/crop.svg"></button>
+                    <button type="button" class="btn btn-done js-done">Done <span class="glyphicon glyphicon-remove"></span></button>
+                </div>
+                <div class="a-tip">
+                    <p><strong>Hint:</strong> hold <span>SHIFT</span> while resizing to keep the original aspect ratio.</p>
+                </div>
+            </div><!-- /content -->
+        </div>
     </div>
+
 }
 
 @section scripts {
-<script src="~/Scripts/draganddrop.js"></script>
+    @*<script src="~/scripts/jquery-2.1.1.min.js"></script>*@
+    <script src="~/Scripts/draganddrop.js"></script>
 }

@@ -15,15 +15,15 @@ namespace PoochPositiveTraining.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public PoochPositiveTrainingContext() : base()
+        public PoochPositiveTrainingContext() : base("name=PoochPositiveTrainingContext")
         {
         }
 
-        public System.Data.Entity.DbSet<PoochPositiveTraining.Models.Client> Clients { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
-        public System.Data.Entity.DbSet<PoochPositiveTraining.Models.Dog> Dogs { get; set; }
+        public DbSet<Dog> Dogs { get; set; }
 
-        public System.Data.Entity.DbSet<PoochPositiveTraining.Models.FilePath> FilePaths { get; set; }
+        public DbSet<FilePath> FilePaths { get; set; }
 
         public DbSet<File> Files { get; set; }
     }

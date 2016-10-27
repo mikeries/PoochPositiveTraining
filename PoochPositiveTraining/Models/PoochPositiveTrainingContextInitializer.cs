@@ -23,6 +23,7 @@ namespace PoochPositiveTraining.Models
             };
 
             context.Clients.Add(client);
+
             context.Clients.Add(new Client()
             {
                 FirstName = "Michelle",

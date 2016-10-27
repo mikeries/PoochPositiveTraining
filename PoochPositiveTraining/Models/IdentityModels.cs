@@ -21,7 +21,7 @@ namespace PoochPositiveTraining.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ApplicationDbContext", throwIfV1Schema: false)
         {
         }
 

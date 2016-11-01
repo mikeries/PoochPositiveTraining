@@ -204,9 +204,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610271503456_init.cs" />
-    <Compile Include="Migrations\201610271503456_init.Designer.cs">
-      <DependentUpon>201610271503456_init.cs</DependentUpon>
+    <Compile Include="Migrations\201611012156271_Init.cs" />
+    <Compile Include="Migrations\201611012156271_Init.Designer.cs">
+      <DependentUpon>201611012156271_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -217,6 +217,7 @@
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\FilePath.cs" />
     <Compile Include="Models\FileType.cs" />
+    <Compile Include="Models\Helpers.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PoochPositiveTrainingContext.cs" />
@@ -354,8 +355,8 @@
     <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610271503456_init.resx">
-      <DependentUpon>201610271503456_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611012156271_Init.resx">
+      <DependentUpon>201611012156271_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

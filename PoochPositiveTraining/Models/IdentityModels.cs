@@ -21,7 +21,7 @@ namespace PoochPositiveTraining.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("ApplicationDbContext", throwIfV1Schema: false)
+            : base(Helpers.GetRDSConnection() ?? "DefaultConnection", throwIfV1Schema: false)
         {
         }
 
@@ -29,7 +29,5 @@ namespace PoochPositiveTraining.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<PoochPositiveTraining.Models.Client> Clients { get; set; }
     }
 }

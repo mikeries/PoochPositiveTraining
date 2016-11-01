@@ -15,7 +15,8 @@ namespace PoochPositiveTraining.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-        public PoochPositiveTrainingContext() : base("name=PoochPositiveTrainingContext")
+        public PoochPositiveTrainingContext()
+            : base(Helpers.GetRDSConnection() ?? "DefaultConnection")
         {
         }
 

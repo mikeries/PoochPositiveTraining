@@ -109,11 +109,11 @@
                             @{
                                 if (dog.ThumbnailID != 0)
                                 {
-                                    <img src="~/File?id=@dog.ThumbnailID" class="thumbnail" onerror="if (this.src != '/images/thumbnails/DogNoImage.png') this.src='/images/thumbnails/DogNoImage.png'" />
+                                    <img src="~/File?id=@dog.ThumbnailID" class="thumbnail" onerror="if (this.src != '~/images/thumbnails/DogNoImage.png') this.src='~/images/thumbnails/DogNoImage.png'" />
                                 }
                                 else
                                 {
-                                    <img src="/images/thumbnails/DogNoImage.png" class="thumbnail" />
+                                    <img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />
                                 }
                             }
                         </a>

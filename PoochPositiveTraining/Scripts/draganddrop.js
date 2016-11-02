@@ -247,7 +247,7 @@ var resizeableImage = function (image_data, editCompleteMethod) {
             showFiles	 = function( files )
             {
                 if (files.length == 0) {
-                    var html = '<img src="/images/thumbnails/DogNoImage.png" class="thumbnail" />';
+                    var html = '<img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />';
                     var img = $(html)[0];
                     $dropbox.find('.thumbnail').replaceWith(img);
                 }

@@ -5,6 +5,8 @@
 }
 
 <link href="~/Content/draganddrop.css" rel="stylesheet" />
+<link href="~/Content/resizeandcrop.css" rel="stylesheet" />
+
 
 @using (Html.BeginForm("Edit", "Dogs", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -79,7 +81,7 @@
                         @{
                             if (Model.ThumbnailID != 0)
                             {
-                                <img src="~/File?id=@Model.ThumbnailID" class="thumbnail" onerror="if (this.src != '~/images/thumbnails/DogNoImage.png') this.src='~/images/thumbnails/DogNoImage.png'" />
+                                <img src="~/File?id=@Model.ThumbnailID" class="thumbnail" />
                             }
                             else
                             {
@@ -87,6 +89,24 @@
                             }
                         }
                     </div>
+                </div>
+
+                <div>
+                    <!-- Top Navigation -->
+                    <div class="content col-md-10 text-center hidden">
+                        <div class="component">
+                            <div class="overlay">
+                                <div class="overlay-inner">
+                                </div>
+                            </div>
+                            <img class="resize-image" src="~/images/thumbnails/DogNoImage.png" alt="image for resizing">
+                            <button type="button" class="btn btn-crop js-crop">Crop<img class="icon-crop" src="~/images/crop.svg"></button>
+                            <button type="button" class="btn btn-done js-done">Done <span class="glyphicon glyphicon-remove"></span></button>
+                        </div>
+                        <div class="a-tip">
+                            <p><strong>Hint:</strong> hold <span>SHIFT</span> while resizing to keep the original aspect ratio.</p>
+                        </div>
+                    </div><!-- /content -->
                 </div>
             </div>
         </div>
@@ -97,5 +117,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script src="~/Scripts/draganddrop.js"></script>
+<script src="~/Scripts/myapps/draganddrop.js"></script>
 }

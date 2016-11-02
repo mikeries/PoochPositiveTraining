@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PoochPositiveTraining.Models;
+using System.Text;
 
 namespace PoochPositiveTraining.Controllers
 {
@@ -59,29 +60,50 @@ namespace PoochPositiveTraining.Controllers
                 db.Dogs.Add(dog);
                 db.SaveChanges();
 
-                if (upload != null && upload.ContentLength > 0)
+                var thumbnail = new File
                 {
+                    FileType = FileType.Thumbnail,
+                    DogID = dog.DogID,
+                    Content = null
+                };
 
-                    var thumbnail = new File
-                    {
-                        FileName = dog.Name + "-" + dog.DogID.ToString() + System.IO.Path.GetExtension(upload.FileName),
-                        FileType = FileType.Thumbnail,
-                        ContentType = upload.ContentType,
-                        DogID = dog.DogID
-                    };
+                // Note: the javascript functions will add some additional formdata containing information for the edited thumbnail.
+                // if present, use this instead of the uploaded file.
+                string thumbtype = Request.Form["imageContentType"];
+                string thumbData = Request.Form["imageSrc"];
+
+                if (thumbtype != null && thumbData != null)  // user uploaded an edited image
+                {
+                    thumbnail.FileName = Request.Form["imageFileName"];
+                    thumbnail.ContentType = thumbtype;
+                    thumbnail.Content = Convert.FromBase64String(thumbData);
+                }
+                else if (upload != null && upload.ContentLength > 0)
+                {
+                    thumbnail.FileName = dog.Name + "-" + dog.DogID.ToString() + System.IO.Path.GetExtension(upload.FileName);
+                    thumbnail.ContentType = upload.ContentType;
 
                     using (var reader = new System.IO.BinaryReader(upload.InputStream))
                     {
                         thumbnail.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+                }
+
+                if (thumbnail.Content != null)
+                {
+                    File oldThumb = db.Files.Find(dog.ThumbnailID);
+                    if (oldThumb != null)
+                    {
+                        db.Files.Remove(oldThumb);
                     }
 
                     db.Files.Add(thumbnail);
                     db.SaveChanges();
 
                     dog.ThumbnailID = thumbnail.FileId;
+                    db.SaveChanges();
                 }
-
-                db.SaveChanges();
+                
                 return RedirectToAction("Details", "Clients", new { id = dog.ClientID });
             }
 
@@ -113,25 +135,41 @@ namespace PoochPositiveTraining.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID")] Dog dog, HttpPostedFileBase upload)
         {
+
             if (ModelState.IsValid)
             {
                 db.Entry(dog).State = EntityState.Modified;
 
-                if (upload != null && upload.ContentLength > 0)
+                var thumbnail = new File
                 {
-                    var thumbnail = new File
-                    {
-                        FileName = dog.Name + "-" + dog.DogID.ToString() + System.IO.Path.GetExtension(upload.FileName),
-                        FileType = FileType.Thumbnail,
-                        ContentType = upload.ContentType,
-                        DogID = dog.DogID
-                    };
+                    FileType = FileType.Thumbnail,
+                    DogID = dog.DogID,
+                    Content = null
+                };
+
+        // Note: the javascript functions will add some additional formdata containing information for the edited thumbnail.
+        // if present, use this instead of the uploaded file.
+                string thumbtype = Request.Form["imageContentType"];
+                string thumbData = Request.Form["imageSrc"];
+
+                if (thumbtype != null && thumbData != null)  // user uploaded an edited image
+                {
+                    thumbnail.FileName = Request.Form["imageFileName"];
+                    thumbnail.ContentType = thumbtype;
+                    thumbnail.Content = Convert.FromBase64String(thumbData);
+                }
+                else if (upload != null && upload.ContentLength > 0)
+                {
+                    thumbnail.FileName = dog.Name + "-" + dog.DogID.ToString() + System.IO.Path.GetExtension(upload.FileName);
+                    thumbnail.ContentType = upload.ContentType;
 
                     using (var reader = new System.IO.BinaryReader(upload.InputStream))
                     {
                         thumbnail.Content = reader.ReadBytes(upload.ContentLength);
                     }
+                }
 
+                if (thumbnail.Content != null) { 
                     File oldThumb = db.Files.Find(dog.ThumbnailID);
                     if (oldThumb != null)
                     {
@@ -142,9 +180,9 @@ namespace PoochPositiveTraining.Controllers
                     db.SaveChanges();
 
                     dog.ThumbnailID = thumbnail.FileId;
+                    db.SaveChanges();
                 }
-
-                db.SaveChanges();
+                
                 return RedirectToAction("Details", "Clients", new { id = dog.ClientID });
             }
 

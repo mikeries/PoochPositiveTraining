@@ -24,6 +24,7 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         image_target.src = image_data;
         orig_src.src = image_target.src;
 
+        // get rid of old elements
         $('.resize-image').remove();
         $('.resize-container').remove();
         $('.component').append(image_target);
@@ -227,10 +228,10 @@ var resizeableImage = function (image_data, editCompleteMethod) {
     init();
 };
 
-;( function( $, window, document, undefined )
+( function( $, window, document, undefined )
 {
+    var upload = {};
     // feature detection for drag&drop upload
-
     var isAdvancedUpload = function()
     {
         var div = document.createElement( 'div' );
@@ -259,6 +260,8 @@ var resizeableImage = function (image_data, editCompleteMethod) {
                     if (f.type.match('image.*')) {
                         var reader = new FileReader();
 
+                        upload.imageContentType=f.type;
+
                         reader.onload = (function (theFile) {
                             return function (e) {
                                 var thumbnail = $dropbox.find('.thumbnail')[0];
@@ -267,8 +270,11 @@ var resizeableImage = function (image_data, editCompleteMethod) {
 
                                 var resizeImage = $editor.find('.resize-image')[0];
                                 resizeImage.src = e.target.result;
+                                upload.imageContentType = theFile.type;
+                                upload.imageFileName = theFile.Name;
                                 resizeableImage(e.target.result, function (result) {
                                     thumbnail.src = result;
+                                    upload.imageSrc= result;
                                 });
                             };
                         })(f);
@@ -282,6 +288,24 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         $input.on( 'change', function( e )
         {
             showFiles(e.target.files);
+        });
+
+        // add hidden input elements to pass back information on the thumbnail.
+        $('form').on('submit', function (e) {
+
+            upload.imageSrc = upload.imageSrc.replace('data:image/png;base64,', '');
+            var thumbContentType = $("<input>")
+                .attr('type', 'hidden')
+                .attr('name', 'imageContentType').val(upload['imageContentType'])
+            $('form').append($(thumbContentType));
+            var thumbSource = $("<input>")
+                .attr('type', 'hidden')
+                .attr('name', 'imageSrc').val(upload['imageSrc']);
+            $('form').append($(thumbSource));
+            var thumbFileName = $("<input>")
+                .attr('type', 'hidden')
+                .attr('name', 'imageFileName').val(upload['imageFileName']);
+            $('form').append($(thumbFileName));
         });
 
         // drag&drop files if the feature is available

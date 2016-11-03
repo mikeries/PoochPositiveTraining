@@ -217,7 +217,7 @@ var resizeableImage = function (image_data, editCompleteMethod) {
 
         crop_canvas.getContext('2d').drawImage(image_target.get(0), left, top, width, height, 0, 0, width, height);
 
-        if (typeof (editCompleteMethod) == 'function') {
+        if (typeof (editCompleteMethod) === 'function') {
             editCompleteMethod(crop_canvas.toDataURL("image/png"));
         } else {
             window.open(crop_canvas.toDataURL("image/png"));
@@ -247,7 +247,8 @@ var resizeableImage = function (image_data, editCompleteMethod) {
             droppedFiles = false,
             showFiles	 = function( files )
             {
-                if (files.length == 0) {
+
+                if (files.length === 0) {
                     var html = '<img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />';
                     var img = $(html)[0];
                     $dropbox.find('.thumbnail').replaceWith(img);
@@ -329,7 +330,8 @@ var resizeableImage = function (image_data, editCompleteMethod) {
             })
             .on( 'drop', function( e )
             {
-                $input.prop("files", e.originalEvent.dataTransfer.files)
+                $input.prop("files", e.originalEvent.dataTransfer.files);
+                showFiles(e.originalEvent.dataTransfer.files);
             });
         }
 

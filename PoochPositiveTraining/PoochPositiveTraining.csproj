@@ -261,6 +261,7 @@
     <Content Include="images\Oreo.jpg" />
     <Content Include="images\PPG Logo.png" />
     <Content Include="images\Private puppy.jpg" />
+    <Content Include="images\sad-puppy.jpg" />
     <Content Include="images\smallhappy.jpg" />
     <Content Include="images\STL Training Club Logo.png" />
     <Content Include="images\Tom.JPG" />
@@ -341,6 +342,8 @@
     <Content Include="Views\Dogs\Edit.cshtml" />
     <Content Include="Views\NewDogEdit.cshtml" />
     <Content Include="Views\Dogs\DropTest.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Account\ConfirmationSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

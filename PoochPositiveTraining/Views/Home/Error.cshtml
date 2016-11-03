@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+}
+@using System.Configuration;
+
+<h2>Sorry, an error has occurred in this application.</h2>
+
+<p>
+    Please send an email to <a href='mailto:@ConfigurationManager.AppSettings["SupportEmailAddress"]'>@ConfigurationManager.AppSettings["SupportEmailAddress"]</a> so that we can improve our service to you!
+</p>
+
+<img src="~/images/sad-puppy.jpg" />

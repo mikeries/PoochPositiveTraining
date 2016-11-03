@@ -77,5 +77,9 @@ namespace PoochPositiveTraining.Controllers
         {
             return View();
         }
+        public ActionResult Error(string ex)
+        {
+            return View();
+        }
     }
 }

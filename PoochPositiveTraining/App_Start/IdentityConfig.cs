@@ -19,11 +19,12 @@ namespace PoochPositiveTraining
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             using (SmtpClient client = new SmtpClient())
             {
-                return client.SendMailAsync(ConfigurationManager.AppSettings["SupportEmailAddress"], message.Destination, message.Subject, message.Body);
+                await client.SendMailAsync(ConfigurationManager.AppSettings["SupportEmailAddress"], message.Destination, message.Subject, message.Body);
+                return;
             }
         }
     }

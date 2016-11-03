@@ -230,9 +230,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\resizeandcrop.css" />
     <Content Include="Content\draganddrop.css" />
-    <Content Include="Content\example.css" />
     <Content Include="images\crop.svg" />
     <Content Include="images\DogNoImage.png" />
+    <Content Include="images\facebookIcon.png" />
     <Content Include="images\gridme.png" />
     <Content Include="images\HeadTrainer.jpg" />
     <Content Include="Content\Site.css" />

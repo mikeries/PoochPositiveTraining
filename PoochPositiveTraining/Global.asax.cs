@@ -14,7 +14,7 @@ namespace PoochPositiveTraining
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new PoochPositiveTrainingContextInitializer());
+            //Database.SetInitializer(new PoochPositiveTrainingContextInitializer());
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

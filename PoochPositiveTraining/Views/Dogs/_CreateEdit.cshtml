@@ -1,6 +1,6 @@
 ﻿@model PoochPositiveTraining.Models.Dog
 
-<script src="~/Scripts/knockout-2.0.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
 
 <div class="row">
     <div class="form-vertical row">
@@ -27,18 +27,6 @@
                 @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new {id="birthday", data_bind="value: birthday", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
                 <span data-bind="text: age"></span>
-                @*@if (Model.Birthday != null)
-                {
-                    int months = (int)((double)@Model.Age.Days / 30.436875);
-                    if (months < 24)
-                    {
-                        <span>@String.Format("{0} months old", months)</span>
-                    }
-                    else
-                    {
-                        <span>@String.Format("{0} years old", months / 12)</span>
-                    }
-                }*@
         </div>
 
         <div class="col-md-3">

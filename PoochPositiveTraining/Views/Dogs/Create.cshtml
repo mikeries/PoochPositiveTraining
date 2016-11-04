@@ -7,7 +7,7 @@
 <link href="~/Content/draganddrop.css" rel="stylesheet" />
 <link href="~/Content/resizeandcrop.css" rel="stylesheet" />
 
-@using (Html.BeginForm("Create","Dogs",null,FormMethod.Post,new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "Dogs", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -22,80 +22,7 @@
         <hr />
     </div>
 
-    <div class="row">
-        <div class="form-horizontal col-md-5">
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Breed, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Breed, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Breed, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ClientID, "Owner", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("ClientID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ClientID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-7">
-            <div class="form-group row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label text-right" })
-                    @Html.TextAreaFor(model => model.Comments, 10, 40, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="dropbox text-center col-md-6">
-                    <input type="file" name="upload" id="files" class="dropbox__file" accept="image/*" single />
-                    <label for="files" class="btn btn-warning"><strong>Choose image</strong></label>
-                    <div class="dropzone">
-                        <img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <!-- Top Navigation -->
-                <div class="content col-md-10 text-center hidden">
-                    <div class="component">
-                        <div class="overlay">
-                            <div class="overlay-inner">
-                            </div>
-                        </div>
-                        <img class="resize-image" src="~/images/thumbnails/DogNoImage.png" alt="image for resizing">
-                        <button type="button" class="btn btn-crop js-crop">Crop<img class="icon-crop" src="~/images/crop.svg"></button>
-                        <button type="button" class="btn btn-done js-done">Done <span class="glyphicon glyphicon-remove"></span></button>
-                    </div>
-                    <div class="a-tip">
-                        <p><strong>Hint:</strong> hold <span>SHIFT</span> while resizing to keep the original aspect ratio.</p>
-                    </div>
-                </div><!-- /content -->
-            </div>
-        </div>
-
-    </div>
+    @Html.Partial("_CreateEdit");
 
 }
 

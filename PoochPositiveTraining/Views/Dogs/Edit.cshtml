@@ -19,7 +19,7 @@
                 Back
             </button>
             <input type="submit" value="Save" class="btn btn-default" />
-            <button type="button" onclick="location.href='@Url.Action("Delete", "Dogs", new { id = Model.DogID })'" class="btn btn-danger delete">
+            <button type="button" onclick="location.href='@Url.Action("Delete", "Dogs", new { id = Model.DogID })'" class="btn btn-danger pull-right">
                 <span class="glyphicon glyphicon-trash"></span>
                 Delete
             </button>
@@ -27,92 +27,10 @@
         <hr />
     </div>
 
-    <div class="row">
-        <div class="form-horizontal col-md-5">
+    @Html.Partial("_CreateEdit");
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.DogID)
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Breed, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Breed, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Breed, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ClientID, "Owner", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("ClientID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ClientID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-7">
-            <div class="form-group row">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label text-right" })
-                    @Html.TextAreaFor(model => model.Comments, 10, 40, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="dropbox text-center col-md-6">
-                    <input type="file" name="upload" id="files" class="dropbox__file" accept="image/*" single />
-                    <label for="files" class="btn btn-warning"><strong>Choose image</strong></label>
-                    <div class="dropzone">
-                        @{
-                            if (Model.ThumbnailID != 0)
-                            {
-                                <img src="~/File?id=@Model.ThumbnailID" class="thumbnail" />
-                            }
-                            else
-                            {
-                                <img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />
-                            }
-                        }
-                    </div>
-                </div>
-
-                <div>
-                    <!-- Top Navigation -->
-                    <div class="content col-md-10 text-center hidden">
-                        <div class="component">
-                            <div class="overlay">
-                                <div class="overlay-inner">
-                                </div>
-                            </div>
-                            <img class="resize-image" src="~/images/thumbnails/DogNoImage.png" alt="image for resizing">
-                            <button type="button" class="btn btn-crop js-crop">Crop<img class="icon-crop" src="~/images/crop.svg"></button>
-                            <button type="button" class="btn btn-done js-done">Done <span class="glyphicon glyphicon-remove"></span></button>
-                        </div>
-                        <div class="a-tip">
-                            <p><strong>Hint:</strong> hold <span>SHIFT</span> while resizing to keep the original aspect ratio.</p>
-                        </div>
-                    </div><!-- /content -->
-                </div>
-            </div>
-        </div>
-
-    </div>
 }
+
 
 
 @section Scripts {

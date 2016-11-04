@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -45,6 +46,7 @@ namespace PoochPositiveTraining.Controllers
 
             ViewBag.ClientID = new SelectList(db.Clients, "ClientID", "Name", clientID);
             ViewBag.Owner = clientID;
+
             return View();
         }
 
@@ -53,8 +55,9 @@ namespace PoochPositiveTraining.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID")] Dog dog, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "Name,Breed,Birthday,Comments,ClientID")] Dog dog, HttpPostedFileBase upload)
         {
+            ModelState.Remove("DogID");
             if (ModelState.IsValid)
             {
                 db.Dogs.Add(dog);
@@ -133,7 +136,7 @@ namespace PoochPositiveTraining.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID")] Dog dog, HttpPostedFileBase upload)
+        public ActionResult Edit([Bind(Include = "DogID,Name,Breed,Birthday,Comments,ClientID,ThumbnailID")] Dog dog, HttpPostedFileBase upload)
         {
 
             if (ModelState.IsValid)
@@ -178,11 +181,10 @@ namespace PoochPositiveTraining.Controllers
 
                     db.Files.Add(thumbnail);
                     db.SaveChanges();
-
                     dog.ThumbnailID = thumbnail.FileId;
-                    db.SaveChanges();
                 }
-                
+                   
+                db.SaveChanges();
                 return RedirectToAction("Details", "Clients", new { id = dog.ClientID });
             }
 

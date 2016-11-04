@@ -343,6 +343,7 @@
     <Content Include="Views\Dogs\DropTest.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Account\ConfirmationSent.cshtml" />
+    <Content Include="Views\Dogs\_CreateEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

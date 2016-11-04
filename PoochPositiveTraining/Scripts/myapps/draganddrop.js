@@ -40,16 +40,6 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         // Assign the container to a variable
         $container = $(image_target).parent('.resize-container');
 
-        // initial resize
-        var height = image_target.get(0).height;
-        var width = image_target.get(0).width;
-        if (height > max_height || width > max_width) {
-            var heightFactor = height / max_height;
-            var widthFactor = width / max_width;
-            var scale = (heightFactor > widthFactor ? heightFactor : widthFactor);
-            resizeImage(width / scale, height / scale);
-        }
-
         // Add events
         $container.on('mousedown touchstart', '.resize-handle', startResize);
         $container.on('mousedown touchstart', 'img', startMoving);
@@ -60,6 +50,30 @@ var resizeableImage = function (image_data, editCompleteMethod) {
 
         // show the editor
         $('.content').removeClass("hidden");
+
+
+        // initial resize
+        var overlay = $('.overlay');
+        var height = image_target.get(0).height;
+        var width = image_target.get(0).width;
+        var crop_height = overlay.height();
+        var crop_width = overlay.width();
+        if (height > crop_height || width > crop_width) {
+            var heightFactor = height / crop_height;
+            var widthFactor = width / crop_width;
+            var scale = (heightFactor > widthFactor ? widthFactor : heightFactor);
+            resizeImage(width / scale, height / scale)
+        }
+
+        // position image in center
+        
+        var borderWidth = (overlay.outerWidth() - overlay.innerWidth())/2;
+        var left = overlay.offset().left  + borderWidth - ($container.width() - overlay.width())/2;
+        var top = overlay.offset().top + borderWidth - ($container.height() - overlay.height()) / 2;
+        $container.offset({
+            'left': left,
+            'top': top
+        });
     };
 
     startResize = function (e) {
@@ -95,6 +109,7 @@ var resizeableImage = function (image_data, editCompleteMethod) {
                 event_state.touches[i].clientY = 0 + ob.clientY;
             });
         }
+
         event_state.evnt = e;
     };
 
@@ -119,7 +134,7 @@ var resizeableImage = function (image_data, editCompleteMethod) {
             height = event_state.container_height - (mouse.y - event_state.container_top);
             left = mouse.x;
             top = mouse.y;
-            if (constrain || e.shiftKey) {
+            if (constrain) {
                 top = mouse.y - ((width / orig_src.width * orig_src.height) - height);
             }
         } else if ($(event_state.evnt.target).hasClass('resize-handle-ne')) {
@@ -127,13 +142,13 @@ var resizeableImage = function (image_data, editCompleteMethod) {
             height = event_state.container_height - (mouse.y - event_state.container_top);
             left = event_state.container_left;
             top = mouse.y;
-            if (constrain || e.shiftKey) {
+            if (constrain) {
                 top = mouse.y - ((width / orig_src.width * orig_src.height) - height);
             }
         }
 
         // Optionally maintain aspect ratio
-        if (constrain && !(e.shiftKey)) {
+        if (constrain) {
             height = width / orig_src.width * orig_src.height;
         }
 

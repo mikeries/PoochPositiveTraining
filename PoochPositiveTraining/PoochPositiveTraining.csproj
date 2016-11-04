@@ -276,7 +276,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Data\dogfacts.json" />
-    <Content Include="Scripts\myapps\resizeandcrop.js" />
     <None Include="Properties\PublishProfiles\PoochPositiveTraining - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\myapps\draganddrop.js" />

@@ -1,5 +1,7 @@
 ﻿@model PoochPositiveTraining.Models.Dog
 
+<script src="~/Scripts/knockout-2.0.0.js"></script>
+
 <div class="row">
     <div class="form-vertical row">
 
@@ -10,7 +12,7 @@
         <div class="form-group">
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { autofocus = "autofocus", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
 
@@ -22,17 +24,30 @@
 
             <div class="col-md-3">
                 @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new {id="birthday", data_bind="value: birthday", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
-            </div>
+                <span data-bind="text: age"></span>
+                @*@if (Model.Birthday != null)
+                {
+                    int months = (int)((double)@Model.Age.Days / 30.436875);
+                    if (months < 24)
+                    {
+                        <span>@String.Format("{0} months old", months)</span>
+                    }
+                    else
+                    {
+                        <span>@String.Format("{0} years old", months / 12)</span>
+                    }
+                }*@
+        </div>
 
-            <div class="col-md-3">
-                @Html.LabelFor(model => model.ClientID, "Owner", htmlAttributes: new { @class = "control-label" })
-                @Html.DropDownList("ClientID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ClientID, "", new { @class = "text-danger" })
-            </div>
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.ClientID, "Owner", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownList("ClientID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ClientID, "", new { @class = "text-danger" })
         </div>
     </div>
+</div>
 
     <div class="row top-buffer">
         <div class="form-group col-md-3">
@@ -74,3 +89,29 @@
     </div>
 
 </div>
+
+<script>
+    document.onreadystatechange = function () {
+        if (document.readyState == "complete") {
+            var bday = document.getElementById('birthday').value;
+            var viewModel = {
+                birthday: ko.observable(bday)
+            };
+
+            viewModel.age = ko.dependentObservable(function () {
+                var now = new Date(Date()).getTime();
+                var birth = new Date(this.birthday()).getTime();
+                var months = Math.floor((now - birth) / 2629746000);
+
+                if (months < 0 || isNaN(months)) {
+                    return null;
+                } else if (months < 24) {
+                    return months + " months old";
+                } else {
+                    return Math.floor(months / 12) + " years old";
+                }
+            }, viewModel);
+            ko.applyBindings(viewModel);
+        }};
+</script>
+

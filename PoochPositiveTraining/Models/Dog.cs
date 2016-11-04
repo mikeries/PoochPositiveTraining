@@ -22,6 +22,19 @@ namespace PoochPositiveTraining.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<DateTime> Birthday { get; set; }
 
+        public TimeSpan Age { get
+            {
+                if (Birthday != null)
+                {
+                    return DateTime.Today - (DateTime)Birthday;
+                }
+                else
+                {
+                    return TimeSpan.MinValue;
+                }
+            }
+        }
+
         public string Comments { get; set; }
 
         public int ThumbnailID { get; set; }

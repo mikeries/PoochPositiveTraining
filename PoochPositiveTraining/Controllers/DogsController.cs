@@ -55,7 +55,7 @@ namespace PoochPositiveTraining.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,Breed,Birthday,Comments,ClientID")] Dog dog, HttpPostedFileBase upload)
         {
-            ModelState.Remove("DogID");
+
             if (ModelState.IsValid)
             {
                 db.Dogs.Add(dog);
@@ -127,7 +127,7 @@ namespace PoochPositiveTraining.Controllers
 
             if (thumbtype != null && thumbData != null)  // user uploaded an edited image
             {
-                thumbnail.FileName = Request.Form["imageFileName"];
+                thumbnail.FileName = dog.Name + "-" + dog.DogID.ToString() + ".png";
                 thumbnail.ContentType = thumbtype;
                 thumbnail.Content = Convert.FromBase64String(thumbData);
             }

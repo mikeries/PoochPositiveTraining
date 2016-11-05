@@ -51,8 +51,7 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         // show the editor
         $('.content').removeClass("hidden");
 
-
-        // initial resize
+        // initial resize to fit width or height to the crop window
         var overlay = $('.overlay');
         var height = image_target.get(0).height;
         var width = image_target.get(0).width;
@@ -62,11 +61,10 @@ var resizeableImage = function (image_data, editCompleteMethod) {
             var heightFactor = height / crop_height;
             var widthFactor = width / crop_width;
             var scale = (heightFactor > widthFactor ? widthFactor : heightFactor);
-            resizeImage(width / scale, height / scale)
+            resizeImage(width / scale, height / scale);
         }
 
         // position image in center
-        
         var borderWidth = (overlay.outerWidth() - overlay.innerWidth())/2;
         var left = overlay.offset().left  + borderWidth - ($container.width() - overlay.width())/2;
         var top = overlay.offset().top + borderWidth - ($container.height() - overlay.height()) / 2;
@@ -158,7 +156,7 @@ var resizeableImage = function (image_data, editCompleteMethod) {
             // Without this Firefox will not re-calculate the the image dimensions until drag end
             $container.offset({ 'left': left, 'top': top });
         }
-    }
+    };
 
     resizeImage = function (width, height) {
         resize_canvas.width = width;
@@ -237,8 +235,8 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         } else {
             window.open(crop_canvas.toDataURL("image/png"));
         }
-        
-    }
+
+    };
 
     init();
 };
@@ -246,6 +244,8 @@ var resizeableImage = function (image_data, editCompleteMethod) {
 ( function( $, window, document, undefined )
 {
     var upload = {};
+    var defaultImage = "/images/thumbnails/DogNoImage.png";
+
     // feature detection for drag&drop upload
     var isAdvancedUpload = function()
     {
@@ -259,47 +259,50 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         var $dropbox = $(this),
             $input = $dropbox.find('input[type="file"]'),
             $editor = $('.component'),
+            $thumbnail = $dropbox.find('.thumbnail'),
             droppedFiles = false,
             showFiles	 = function( files )
             {
 
                 if (files.length === 0) {
-                    var html = '<img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />';
+                    var html = '<img src='+defaultImage+' class="thumbnail" />';
                     var img = $(html)[0];
-                    $dropbox.find('.thumbnail').replaceWith(img);
+                    $thumbnail.replaceWith(img);
                 }
                 else
                 {
                     var f = files[0];
 
-                    // ignore file if not an image
+                    // if file is an image
                     if (f.type.match('image.*')) {
                         var reader = new FileReader();
 
                         upload.imageContentType=f.type;
-
-                        reader.onload = (function (theFile) {
-                            return function (e) {
-                                var thumbnail = $dropbox.find('.thumbnail')[0];
-                                thumbnail.src = e.target.result;
-                                thumbnail.title = escape(theFile.name);
-
-                                var resizeImage = $editor.find('.resize-image')[0];
-                                resizeImage.src = e.target.result;
-                                upload.imageContentType = theFile.type;
-                                upload.imageFileName = theFile.Name;
-                                resizeableImage(e.target.result, function (result) {
-                                    thumbnail.src = result;
-                                    upload.imageSrc= result;
-                                });
-                            };
-                        })(f);
-
+                        reader.onload = onload(f);
                         reader.readAsDataURL(f);
-
                     }
                 }
             };
+
+        onload = function (theFile) {
+            return function (e) {
+                $thumbnail[0].src = e.target.result;
+                $thumbnail[0].title = escape(theFile.name);
+                
+                if ($editor) edit(theFile,e);
+            };
+        };
+
+        edit = function (f,ev) {
+            var resizeImage = $editor.find('.resize-image')[0];
+            resizeImage.src = ev.target.result;
+            upload.imageContentType = f.type;
+            upload.imageFileName = f.Name;
+            resizeableImage(ev.target.result, function (result) {
+                $thumbnail[0].src = result;
+                upload.imageSrc = result;
+            });
+        }
 
         $input.on( 'change', function( e )
         {
@@ -308,20 +311,17 @@ var resizeableImage = function (image_data, editCompleteMethod) {
 
         // add hidden input elements to pass back information on the thumbnail.
         $('form').on('submit', function (e) {
-
-            upload.imageSrc = upload.imageSrc.replace('data:image/png;base64,', '');
-            var thumbContentType = $("<input>")
-                .attr('type', 'hidden')
-                .attr('name', 'imageContentType').val(upload['imageContentType'])
-            $('form').append($(thumbContentType));
-            var thumbSource = $("<input>")
-                .attr('type', 'hidden')
-                .attr('name', 'imageSrc').val(upload['imageSrc']);
-            $('form').append($(thumbSource));
-            var thumbFileName = $("<input>")
-                .attr('type', 'hidden')
-                .attr('name', 'imageFileName').val(upload['imageFileName']);
-            $('form').append($(thumbFileName));
+            if (upload.imageSrc && upload.imageContentType) {
+                upload.imageSrc = upload.imageSrc.replace('data:image/png;base64,', '');
+                var thumbContentType = $("<input>")
+                    .attr('type', 'hidden')
+                    .attr('name', 'imageContentType').val(upload['imageContentType']);
+                $('form').append($(thumbContentType));
+                var thumbSource = $("<input>")
+                    .attr('type', 'hidden')
+                    .attr('name', 'imageSrc').val(upload['imageSrc']);
+                $('form').append($(thumbSource));
+            }
         });
 
         // drag&drop files if the feature is available

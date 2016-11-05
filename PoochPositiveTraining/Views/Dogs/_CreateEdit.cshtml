@@ -53,7 +53,7 @@
                 @{
                     if (Model != null && Model.ThumbnailID != 0)
                     {
-                        <img src="~/File?id=@Model.ThumbnailID" class="thumbnail" />
+                        <img src="~/File?id=@Model.ThumbnailID" default-image="/images/thumbnails/DogNoImage.png" class="thumbnail" />
                     }
                     else
                     {
@@ -63,13 +63,9 @@
             </div>
         </div>
 
-        <div class="content col-md-6 text-center hidden">
-            <div class="component">
-                <div class="overlay">
-                    <div class="overlay-inner">
-                    </div>
-                </div>
-                <img class="resize-image" src="~/images/thumbnails/DogNoImage.png" alt="image for resizing">
+        <div class="col-md-6 text-center">
+            <div class="component hidden">
+                <img class="component-image" src="~/images/thumbnails/DogNoImage.png" alt="image for resizing">
                 <button type="button" class="btn btn-crop js-crop">Crop<img class="icon-crop" src="~/images/crop.svg"></button>
                 <button type="button" class="btn btn-done js-done">Done <span class="glyphicon glyphicon-remove"></span></button>
             </div>

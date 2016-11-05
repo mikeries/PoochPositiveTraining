@@ -9,13 +9,13 @@ var resizeableImage = function (image_data, editCompleteMethod) {
     // Some variable and settings
     var $container,
         orig_src = new Image(),
-        image_target = $('.resize-image').clone().get(0),
+        image_target = $('.component-image').clone().get(0),
         event_state = {},
         constrain = true,  // constrain by default
         min_width = 60, // Change as required
         min_height = 60,
-        max_width = 700, // Change as required
-        max_height =700,
+        max_width = 600, // Change as required
+        max_height =600,
         resize_canvas = document.createElement('canvas');
 
     init = function () {
@@ -24,11 +24,18 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         image_target.src = image_data;
         orig_src.src = image_target.src;
 
-        // get rid of old elements
-        $('.resize-image').remove();
+        // get rid of old elements, in case we're starting again
+        $('.component-image').remove();
         $('.resize-container').remove();
+        $('.overlay').remove();
+
+        // add the overlay
+        $('.component').append($('<div class="overlay"></div>'))
+        $('.overlay').append($('<div class="overlay-inner"></div>'));
+
+        // replace the component image
         $('.component').append(image_target);
-        image_target=$('.resize-image');
+        image_target = $('.component-image');
 
         // Wrap the image with the container and add resize handles
         $(image_target).wrap('<div class="resize-container"></div>')
@@ -45,11 +52,11 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         $container.on('mousedown touchstart', 'img', startMoving);
         $('.js-crop').on('click', crop);
         $('.js-done').on('click', function () {
-            $('.content').addClass("hidden");
+            $('.component').addClass("hidden");
         });
 
         // show the editor
-        $('.content').removeClass("hidden");
+        $('.component').removeClass("hidden");
 
         // initial resize to fit width or height to the crop window
         var overlay = $('.overlay');
@@ -72,6 +79,8 @@ var resizeableImage = function (image_data, editCompleteMethod) {
             'left': left,
             'top': top
         });
+
+        crop();
     };
 
     startResize = function (e) {
@@ -257,17 +266,17 @@ var resizeableImage = function (image_data, editCompleteMethod) {
     $( '.dropbox' ).each( function()
     {
         var $dropbox = $(this),
+            $thumbnail = $dropbox.find('.thumbnail');
             $input = $dropbox.find('input[type="file"]'),
             $editor = $('.component'),
-            $thumbnail = $dropbox.find('.thumbnail'),
             droppedFiles = false,
-            showFiles	 = function( files )
+            defaultImage = $thumbnail.attr('default-image');
+
+        showFiles = function( files )
             {
 
-                if (files.length === 0) {
-                    var html = '<img src='+defaultImage+' class="thumbnail" />';
-                    var img = $(html)[0];
-                    $thumbnail.replaceWith(img);
+                if (files.length === 0 && defaultImage) {
+                    $thumbnail[0].src = defaultImage;
                 }
                 else
                 {
@@ -294,7 +303,7 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         };
 
         edit = function (f,ev) {
-            var resizeImage = $editor.find('.resize-image')[0];
+            var resizeImage = $editor.find('.component-image')[0];
             resizeImage.src = ev.target.result;
             upload.imageContentType = f.type;
             upload.imageFileName = f.Name;

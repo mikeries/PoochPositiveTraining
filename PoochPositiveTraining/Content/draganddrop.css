@@ -52,16 +52,9 @@
     outline: -webkit-focus-ring-color auto 5px;
 }
 
-.js .dropbox__file + label * {
-    /* pointer-events: none; */ /* in case of FastClick lib use */
-}
-
-.no-js .dropbox__file + label {
-    display: none;
-}
-
-.no-js .dropbox {
+.dropbox__file + label {
     display:none;
 }
+
 
 

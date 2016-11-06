@@ -10,9 +10,8 @@
 }
 
 .dropbox.has-advanced-upload {
-    outline: 2px dashed #92b0b3;
+    outline: 2px dashed rgba(103, 14, 63, 0.50);
     outline-offset: -10px;
-    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
     transition: outline-offset .15s ease-in-out, background-color .15s linear;
 }
 
@@ -43,7 +42,7 @@
 .js .dropbox__file + label:hover strong,
 .dropbox__file:focus + label strong,
 .dropbox__file.has-focus + label strong {
-    color: #39bfd3;
+    color: rgba(103, 14, 63, 0.90);
 }
 
 .js .dropbox__file:focus + label,

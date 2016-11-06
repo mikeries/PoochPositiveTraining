@@ -278,6 +278,7 @@
     <Content Include="App_Data\dogfacts.json" />
     <None Include="Properties\PublishProfiles\PoochPositiveTraining - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\myapps\browserdetection.js" />
     <Content Include="Scripts\myapps\draganddrop.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

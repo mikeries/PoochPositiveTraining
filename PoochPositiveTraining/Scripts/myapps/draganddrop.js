@@ -11,7 +11,7 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         orig_src = new Image(),
         image_target = $('.component-image').clone().get(0),
         event_state = {},
-        constrain = true,  // constrain by default
+        constrainAspectRatio = true,  // constrain by default
         min_width = 60, // Change as required
         min_height = 60,
         max_width = 600, // Change as required
@@ -125,39 +125,56 @@ var resizeableImage = function (image_data, editCompleteMethod) {
         mouse.x = (e.clientX || e.pageX || e.originalEvent.touches[0].clientX) + $(window).scrollLeft();
         mouse.y = (e.clientY || e.pageY || e.originalEvent.touches[0].clientY) + $(window).scrollTop();
 
+        // determine limits for the position of the image edges
+        var crop_window = $('.overlay');
+        var crop_edge_left = crop_window.offset().left;
+        var crop_edge_right = crop_edge_left + crop_window.width();
+        var crop_edge_top = crop_window.offset().top;
+        var crop_edge_bottom = crop_edge_top + crop_window.height();
+        var width = $container.width();
+        var height = $container.height();
+
         // Position image differently depending on the corner dragged and constraints
         if ($(event_state.evnt.target).hasClass('resize-handle-se')) {
+            mouse.x = mouse.x < crop_edge_right ? crop_edge_right : mouse.x;
+            mouse.y = mouse.y < crop_edge_bottom ? crop_edge_bottom : mouse.y;
             width = mouse.x - event_state.container_left;
             height = mouse.y - event_state.container_top;
             left = event_state.container_left;
             top = event_state.container_top;
         } else if ($(event_state.evnt.target).hasClass('resize-handle-sw')) {
+            mouse.x = mouse.x > crop_edge_left ? crop_edge_left : mouse.x;
+            mouse.y = mouse.y < crop_edge_bottom ? crop_edge_bottom : mouse.y;
             width = event_state.container_width - (mouse.x - event_state.container_left);
             height = mouse.y - event_state.container_top;
             left = mouse.x;
             top = event_state.container_top;
         } else if ($(event_state.evnt.target).hasClass('resize-handle-nw')) {
+            mouse.x = mouse.x > crop_edge_left ? crop_edge_left : mouse.x;
+            mouse.y = mouse.y > crop_edge_top ? crop_edge_top : mouse.y;
             width = event_state.container_width - (mouse.x - event_state.container_left);
             height = event_state.container_height - (mouse.y - event_state.container_top);
             left = mouse.x;
             top = mouse.y;
-            if (constrain) {
-                top = mouse.y - ((width / orig_src.width * orig_src.height) - height);
-            }
+            //if (constrainAspectRatio) {
+            //    top = mouse.y - ((width / orig_src.width * orig_src.height) - height);
+            //}
         } else if ($(event_state.evnt.target).hasClass('resize-handle-ne')) {
+            mouse.x = mouse.x < crop_edge_right ? crop_edge_right : mouse.x;
+            mouse.y = mouse.y > crop_edge_top ? crop_edge_top : mouse.y;
             width = mouse.x - event_state.container_left;
             height = event_state.container_height - (mouse.y - event_state.container_top);
             left = event_state.container_left;
             top = mouse.y;
-            if (constrain) {
-                top = mouse.y - ((width / orig_src.width * orig_src.height) - height);
-            }
+            //if (constrainAspectRatio) {
+            //    top = mouse.y - ((width / orig_src.width * orig_src.height) - height);
+            //}
         }
 
         // Optionally maintain aspect ratio
-        if (constrain) {
-            height = width / orig_src.width * orig_src.height;
-        }
+        //if (constrainAspectRatio) {
+        //    height = width / orig_src.width * orig_src.height;
+        //}
 
         if (width > min_width && height > min_height && width < max_width && height < max_height) {
             // To improve performance you might limit how often resizeImage() is called
@@ -197,10 +214,29 @@ var resizeableImage = function (image_data, editCompleteMethod) {
 
         mouse.x = (e.clientX || e.pageX || touches[0].clientX) + $(window).scrollLeft();
         mouse.y = (e.clientY || e.pageY || touches[0].clientY) + $(window).scrollTop();
+
+        var left = mouse.x - (event_state.mouse_x - event_state.container_left);
+        var top = mouse.y - (event_state.mouse_y - event_state.container_top);
+
+        // constrain position to within the crop window
+        var crop_window = $('.overlay');
+        var crop_edge_left = crop_window.offset().left;
+        var crop_edge_right = crop_edge_left + crop_window.width();
+        var crop_edge_top = crop_window.offset().top;
+        var crop_edge_bottom = crop_edge_top + crop_window.height();
+        var width = $container.width();
+        var height = $container.height();
+
+        left = left < crop_edge_right - width ? crop_edge_right - width : left;
+        left = left > crop_edge_left ? crop_edge_left : left;
+        top = top < crop_edge_bottom - height ? crop_edge_bottom - height : top;
+        top = top > crop_edge_top ? crop_edge_top : top;
+
         $container.offset({
-            'left': mouse.x - (event_state.mouse_x - event_state.container_left),
-            'top': mouse.y - (event_state.mouse_y - event_state.container_top)
+            'left': left,
+            'top': top
         });
+
         // Watch for pinch zoom gesture while moving
         if (event_state.touches && event_state.touches.length > 1 && touches.length > 1) {
             var width = event_state.container_width, height = event_state.container_height;
@@ -224,6 +260,8 @@ var resizeableImage = function (image_data, editCompleteMethod) {
             resizeImage(width, height);
         }
     };
+
+    
 
     crop = function () {
         //Find the part of the image that is inside the crop box

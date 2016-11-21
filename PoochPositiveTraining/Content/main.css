@@ -1,0 +1,62 @@
+
+/* Content */
+
+.img-container,
+.img-preview {
+  background-color: #f7f7f7;
+  width: 100%;
+  text-align: center;
+}
+
+.img-container {
+  min-height: 200px;
+  max-height: 516px;
+  margin-bottom: 20px;
+  background: url(../images/gridme.png) repeat center center;
+  border: 3px solid rgba(103, 14, 63, 0.80);
+}
+
+@media (min-width: 768px) {
+  .img-container {
+    min-height: 516px;
+  }
+}
+
+.img-container > img {
+  max-width: 100%;
+}
+
+.img-preview {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.img-preview > img {
+  max-width: 100%;
+}
+
+.preview-lg {
+  width: 150px;
+  height: 200px;
+}
+
+.btn-done,
+.btn-crop {
+	position: absolute;
+	vertical-align: bottom;
+	padding: 6px 10px;
+	z-index: 999;
+	background-color: rgba(103, 14, 63, 0.80);
+	border: none;
+	border-radius: 5px;
+	color: #FFF;
+}
+
+.btn-crop {
+    left: 20px;
+	top: 5px;
+    bottom: auto;
+}
+

@@ -4,9 +4,9 @@
     ViewBag.Title = "Edit";
 }
 
+<link href="~/Content/cropper.css" rel="stylesheet" />
+<link href="~/Content/main.css" rel="stylesheet" />
 <link href="~/Content/draganddrop.css" rel="stylesheet" />
-<link href="~/Content/resizeandcrop.css" rel="stylesheet" />
-
 
 @using (Html.BeginForm("Edit", "Dogs", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -35,5 +35,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/myapps/draganddrop.js"></script>
+<script src="~/Scripts/myapps/cropper.min.js"></script>
+<script src="~/Scripts/myapps/draganddrop.js"></script>
 }

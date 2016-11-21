@@ -228,6 +228,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cropper.css" />
+    <Content Include="Content\cropper.min.css" />
+    <Content Include="Content\main.css" />
     <Content Include="Content\resizeandcrop.css" />
     <Content Include="Content\draganddrop.css" />
     <Content Include="images\crop.svg" />
@@ -279,6 +282,9 @@
     <None Include="Properties\PublishProfiles\PoochPositiveTraining - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\myapps\browserdetection.js" />
+    <Content Include="Scripts\myapps\cropper.js" />
+    <Content Include="Scripts\myapps\cropper.min.js" />
+    <Content Include="Scripts\myapps\cropperDemo.js" />
     <Content Include="Scripts\myapps\draganddrop.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -288,6 +294,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\myapps\imageEditor.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />

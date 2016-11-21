@@ -6,11 +6,11 @@
 
 <div class="row">
     <p>
-        <button type="button" onclick="location.href='@Url.Action("Index", "Clients")'" class="btn btn-default">
+        <button type="button" onclick='location.href="@Url.Action("Index", "Clients")"' class="btn btn-default">
             <span class="glyphicon glyphicon-arrow-left"></span>
             Back
         </button>
-        <button type="button" onclick="location.href='@Url.Action("Edit", "Clients", new { id = Model.ClientID })'"
+        <button type="button" onclick='location.href="@Url.Action("Edit", "Clients", new { id = Model.ClientID })"'
                 class="btn btn-default">
             Edit
             <span class="glyphicon glyphicon-edit"></span>
@@ -104,16 +104,17 @@
                 foreach (var dog in Model.Dogs.ToList())
                 {
                     <li>
-                        <a href="@Url.Action("Edit", "Dogs", new { id = dog.DogID })">
+                        <a href='@Url.Action("Edit", "Dogs", new { id = dog.DogID })'>
                             <p>@dog.Name</p>
                             @{
                                 if (dog.ThumbnailID != 0)
                                 {
-                                    <img src="~/File?id=@dog.ThumbnailID" class="thumbnail" onerror="if (this.src != '~/images/thumbnails/DogNoImage.png') this.src='~/images/thumbnails/DogNoImage.png'" />
+                                    <img src="~/File?id=@dog.ThumbnailID" class="thumbnail"  alt="Thumbnail image" 
+                                         onerror="if (this.src != '~/images/thumbnails/DogNoImage.png') this.src='~/images/thumbnails/DogNoImage.png'" />
                                 }
                                 else
                                 {
-                                    <img src="~/images/thumbnails/DogNoImage.png" class="thumbnail" />
+                                    <img src="~/images/thumbnails/DogNoImage.png" alt="Thumbnail image" class="thumbnail" />
                                 }
                             }
                         </a>
@@ -121,7 +122,7 @@
                 }
             }
             <li>
-                <a href="@Url.Action("Create", "Dogs", new { clientID = Model.ClientID })">
+                <a href='@Url.Action("Create", "Dogs", new { clientID = Model.ClientID })'>
                     <p>Add Dog</p>
                     <img src="~/images/NewDog.png" class="thumbnail" />
                 </a>

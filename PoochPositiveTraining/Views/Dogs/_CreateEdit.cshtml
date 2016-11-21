@@ -49,7 +49,7 @@
         <div class="dropbox text-center col-md-3">
             <input type="file" name="upload" id="files" class="dropbox__file" accept="image/*" single />
             <label for="files" class="btn btn-default"><strong>Choose image</strong></label>
-            <div class="dropzone">
+            <div class="dropzone img-preview">
                 @{
                     if (Model != null && Model.ThumbnailID != 0)
                     {
@@ -63,11 +63,10 @@
             </div>
         </div>
 
-        <div class="col-md-6 text-center">
-            <div class="component">
-                <img class="component-image" src="~/images/thumbnails/DogNoImage.png" alt="image for resizing">
-                <button type="button" class="btn btn-crop js-crop">Crop<img class="icon-crop" src="~/images/crop.svg"></button>
-                <button type="button" class="btn btn-done js-done">Done <span class="glyphicon glyphicon-ok"></span></button>
+        <div class="col-md-6">
+            <div id="imageEditor" class="img-container hidden">
+                <img id="image" src="" alt="Picture">
+                <button type="button" class="btn btn-crop">Crop</button>
             </div>
         </div>
     </div>
